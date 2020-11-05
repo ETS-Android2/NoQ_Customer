@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/pill_bg"
+    tools:context=".views.ReferralUnsuccessfulActivity">
+
+    <ImageView
+        android:id="@+id/ma_im"
+        android:layout_width="125dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/noq_logo_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_cong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ref_fail"
+        android:textColor="#707070"
+        android:layout_marginTop="40dip"
+        android:layout_gravity="center_horizontal"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ma_im"  />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="180dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/icon_ref_fail"
+        android:contentDescription="@string/img_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_cong" />
+
+    <TextView
+        android:id="@+id/tv_ref_succ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#707070"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:text="@string/ref_fail_msg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_succ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onContinue"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:text="@string/cont"
+        android:textAllCaps="false"
+        android:textColor="#FFF"
+        android:textAppearance="?attr/textAppearanceButton"
+        android:backgroundTint="@color/primaryDarkColor"
+        app:iconTint="#FFF"
+        app:iconPadding="10dp"
+        app:iconSize="15dp"
+        app:iconGravity="textEnd"
+        app:icon="@drawable/icon_continue"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:cornerRadius="10dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ref_succ"/>
+
+    <TextView
+        android:id="@+id/ma_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/ma_footer"
+        android:background="#00DCFF"
+        android:textColor="#FFF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+<!--    <TableLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:stretchColumns="*"-->
+<!--        android:padding="20dp"-->
+<!--        android:layout_marginTop="60dp">-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
+
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/btn_try_again"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                style="@style/Widget.MaterialComponents.Button.Icon"-->
+<!--                app:icon="@drawable/try_again_25"-->
+<!--                app:iconGravity="end"-->
+<!--                app:iconTint="#000"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:text="@string/btn_try_again"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="@color/secondaryTextColor"-->
+<!--                android:backgroundTint="@color/primaryDarkColor"-->
+<!--                android:onClick="onRetry"-->
+<!--                app:cornerRadius="18dp"-->
+<!--                android:textAllCaps="false" />-->
+
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/btn__cont"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                style="@style/Widget.MaterialComponents.Button"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:text="@string/skip"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="@color/secondaryTextColor"-->
+<!--                android:backgroundTint="@color/primaryDarkColor"-->
+<!--                android:onClick="onContinue"-->
+<!--                app:cornerRadius="18dp"-->
+<!--                android:textAllCaps="false" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
+
+<!--        </TableRow>-->
+
+<!--    </TableLayout>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_disp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="@color/primaryTextColor"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

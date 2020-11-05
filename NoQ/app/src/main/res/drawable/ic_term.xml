@@ -1,0 +1,42 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="480dp"
+    android:height="480dp"
+    android:viewportWidth="480"
+    android:viewportHeight="480">
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m280,288v-72h-48v-24c0,-22.398 -17.602,-40 -40,-40s-40,17.602 -40,40v24h-48v224h96v-16h-80v-192h32v16h16v-16h48v16h16v-16h32v56zM216,216h-48v-24c0,-13.602 10.398,-24 24,-24s24,10.398 24,24zM216,216"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m368,464h-288c-4.801,0 -8,-3.199 -8,-8v-432c0,-4.801 3.199,-8 8,-8h232v48c0,13.602 10.398,24 24,24h16v-16h-16c-4.801,0 -8,-3.199 -8,-8v-35.199l48,53.598v205.602h16v-211.199l-68.801,-76.801h-243.199c-13.602,0 -24,10.398 -24,24v432c0,13.602 10.398,24 24,24h288c13.602,0 24,-10.398 24,-24h-16c0,4.801 -3.199,8 -8,8zM368,464"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m168,40h88v16h-88zM168,40"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m104,80h168v16h-168zM104,80"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m104,120h240v16h-240zM104,120"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m256,160h88v16h-88zM256,160"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m296,200h48v16h-48zM296,200"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m296,240h48v16h-48zM296,240"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m104,160h32v16h-32zM104,160"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m248,368h40v16h-40zM248,368"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m248,392h24v16h-24zM248,392"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m400,304h-160c-13.602,0 -24,10.398 -24,24v88c0,13.602 10.398,24 24,24h160c13.602,0 24,-10.398 24,-24v-88c0,-13.602 -10.398,-24 -24,-24zM408,416c0,4.801 -3.199,8 -8,8h-160c-4.801,0 -8,-3.199 -8,-8v-64h176zM408,336h-176v-8c0,-4.801 3.199,-8 8,-8h160c4.801,0 8,3.199 8,8zM408,336"/>
+</vector>

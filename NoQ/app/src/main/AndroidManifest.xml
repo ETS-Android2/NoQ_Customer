@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.younoq.noq">
+
+    <uses-permission android:name="android.hardware.camera2.autofocus" />
+    <uses-permission android:name="android.hardware.camera2" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
+    <uses-permission-sdk-23 android:name="android.permission.INTERNET" />
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission-sdk-23 android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon_app_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icon_app_logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".views.PaymentMethod" />
+        <activity android:name=".views.ChoosePartnerDelivery" />
+        <activity android:name=".views.DeliveryDetails" />
+        <activity android:name=".views.UserAddress" />
+        <activity android:name=".views.CitySelect" />
+        <activity android:name=".views.StoresNoq" />
+        <activity android:name=".views.ProductsCategory" />
+        <activity android:name=".views.ChooseShopType" />
+        <activity android:name=".views.ProductsList" />
+        <activity android:name=".views.Covid19" />
+        <activity android:name=".views.TxnDetails" />
+        <activity android:name=".views.LastFiveTxns" />
+        <activity android:name=".views.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".views.IntroActivity" />
+        <activity android:name=".views.UserProfile" />
+        <activity android:name=".views.PaymentFailed" />
+        <activity android:name=".views.PaymentSuccess" />
+        <activity android:name=".companypolicy.RefundPolicy" />
+        <activity android:name=".companypolicy.PrivacyPolicy" />
+        <activity android:name=".companypolicy.TermsAndConditions" />
+        <activity android:name=".companypolicy.ContactUs" />
+        <activity android:name=".companypolicy.AboutUs" />
+        <activity android:name=".views.CartActivity" />
+        <activity android:name=".views.ProductDetails" /> <!-- <service android:name="org.eclipse.paho.android.service.MqttService" /> -->
+        <activity android:name=".views.MainActivity" />
+        <activity
+            android:name=".views.OTPConfirmActivity"
+            android:parentActivityName=".views.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.younoq.noq.views.MainActivity" />
+        </activity>
+        <activity
+            android:name=".views.UserCredentialsActivity"
+            android:parentActivityName=".views.OTPConfirmActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:resource="@array/preloaded_fonts"
+                android:value="com.younoq.noq.views.OTPConfirmActivity" />
+        </activity>
+        <activity
+            android:name=".views.ReferralSuccessfulActivity"
+            android:parentActivityName=".views.UserCredentialsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.younoq.noq.views.UserCredentialsActivity" />
+        </activity>
+        <activity
+            android:name=".views.ReferralUnsuccessfulActivity"
+            android:parentActivityName=".views.UserCredentialsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.younoq.noq.views.UserCredentialsActivity" />
+        </activity>
+        <activity
+            android:name=".views.BarcodeScannerActivity"
+            android:parentActivityName=".views.UserCredentialsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.younoq.noq.views.UserCredentialsActivity" />
+        </activity>
+        <activity
+            android:name=".views.MyProfile"
+            android:label="@string/title_activity_my_profile"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.younoq.noq.views.MainActivity" />
+        </activity>
+        <activity
+            android:name=".views.ShopDetails"
+            android:parentActivityName=".views.BarcodeScannerActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.younoq.noq.views.BarcodeScannerActivity" />
+        </activity>
+        <activity
+            android:name="com.paytm.pgsdk.PaytmPGActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#4DE0E0E0"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="8dp"
+        android:elevation="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/tdc_linear0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="15dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/order_icon"/>
+
+                    <TextView
+                        android:id="@+id/tdc_p_qty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:text="50"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tdc_p_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:ems="11"
+                    android:text="MULTIRAIN BREAD 100GM Something ELse just  for testing Dear"
+                    android:maxLines="3"
+                    android:textColor="#707070"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" >
+                </Space>
+
+                <TextView
+                    android:id="@+id/tdc_tot_amt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_marginEnd="10dp"
+                    android:ems="4"
+                    android:text="₹1000.35"
+                    android:textColor="#707070"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/tcd_separator"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:visibility="invisible"
+                android:background="@color/primaryDarkColor"
+                app:layout_constraintTop_toBottomOf="@id/tdc_linear0"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tdc_expandable_constraint_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tcd_separator">
+
+                <LinearLayout
+                    android:id="@+id/tdc_linear1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:text="@string/tdc_b_code"
+                        android:textColor="#707070" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" >
+                    </Space>
+
+                    <TextView
+                        android:id="@+id/tdc_bcode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="end"
+                        android:ems="7"
+                        android:text="9780201379662"
+                        android:textColor="#707070"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tdc_linear3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tdc_linear1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tdc_our_price"
+                        android:textColor="#707070"
+                        android:textSize="12sp" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" >
+                    </Space>
+
+                    <TextView
+                        android:id="@+id/tdc_product_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="end"
+                        android:ems="3"
+                        android:textColor="#707070"
+                        android:textSize="12sp"
+                        android:text="₹500"/>
+
+                </LinearLayout>
+
+                <!--                <LinearLayout-->
+                <!--                    android:id="@+id/tdc_linear4"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:layout_marginStart="10dp"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/tdc_linear3">-->
+
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:textSize="12sp"-->
+                <!--                        android:textColor="#707070"-->
+                <!--                        android:text="@string/tdc_our_price"/>-->
+
+                <!--                    <Space-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="1dp"-->
+                <!--                        android:layout_weight="1" >-->
+                <!--                    </Space>-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tdc_our_price"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginEnd="10dp"-->
+                <!--                        android:gravity="end"-->
+                <!--                        android:ems="3"-->
+                <!--                        android:textColor="#707070"-->
+                <!--                        android:textSize="12sp"-->
+                <!--                        android:text="₹500"/>-->
+
+                <!--                </LinearLayout>-->
+
+                <!--                <LinearLayout-->
+                <!--                    android:id="@+id/tdc_linear5"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginStart="10dp"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:layout_marginBottom="10dp"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/tdc_linear4">-->
+
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:textSize="12sp"-->
+                <!--                        android:text="@string/tdc_td"-->
+                <!--                        android:textColor="#707070" />-->
+
+                <!--                    <Space-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="1dp"-->
+                <!--                        android:layout_weight="1" >-->
+                <!--                    </Space>-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tdc_total_discount"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginEnd="10dp"-->
+                <!--                        android:gravity="end"-->
+                <!--                        android:ems="3"-->
+                <!--                        android:text="₹0"-->
+                <!--                        android:textColor="#707070"-->
+                <!--                        android:textSize="12sp" />-->
+
+                <!--                </LinearLayout>-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

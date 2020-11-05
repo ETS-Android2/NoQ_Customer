@@ -1,0 +1,330 @@
+<resources>
+    <string name="app_name">NoQ</string>
+    <string name="fname">Full Name(Required)</string>
+    <string name="email">Email(Optional)</string>
+    <string name="pno">Phone No.</string>
+    <string name="uc_register">Register</string>
+    <string name="cont">Continue</string>
+    <string name="resend_otp">Resend</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="m_signin">Sign In</string>
+    <string name="mob_no">Mobile No.</string>
+    <string name="uc_ref">You will both receive Rs.10 as referral bonus.</string>
+    <string name="referral_number">Referral Phone Number. (if any)</string>
+    <string name="ref_desc">Rs.10 Referral Bonus has been credited to your account.</string>
+    <string name="ref_cong">Congratulations</string>
+    <string name="ref_succ">Referral Successful</string>
+    <string name="ref_amt">₹10</string>
+    <string name="ref_bonus">Bonus</string>
+    <string name="ref_phone_verify">Referral Phone No. Verified</string>
+    <string name="ref_unsuc">OOPS!</string>
+    <string name="ref_fail">Referral Failed</string>
+    <string name="ref_fail_msg">The Referral No. You have entered does not match any Existing User!</string>
+    <string name="img_desc">Successful Image</string>
+    <string name="try_again">Please Try Again!</string>
+    <string name="skip">Skip</string>
+    <string name="check_box">Remember Me</string>
+    <string name="oc_enter_otp">Enter OTP</string>
+    <string name="oc_otp">OTP</string>
+    <string name="btn_try_again">Try Again</string>
+    <string name="blank_phone">Please Enter the Phone No</string>
+    <string name="blank_otp">Please Enter the OTP</string>
+    <string name="invalid_phone_number">Error! Invalid Phone Number</string>
+    <string name="invalid_otp">Invalid OTP!</string>
+    <string name="required">Field is Required!!</string>
+    <string name="already_exists">User Already Exists.</string>
+    <string name="otp_sent_to">Sent to : </string>
+    <string name="otp_reenter_mob_no_desc">Change Mobile Number? </string>
+    <string name="otp_reenter_mob_no">Click Here!</string>
+
+    <!-- UserCredentials Activity -->
+    <string name="uca_register">Register</string>
+    <string name="uca_name">Name(Required)</string>
+    <string name="uca_email">Email(Optional)</string>
+    <string name="uca_referral">Referral No(if any.)</string>
+
+    <string name="profile">User Profile</string>
+    <string name="pno1">Phone No.</string>
+    <string name="mp_acc_detail">Account Details</string>
+    <string name="mp_ref_bal">Bonus</string>
+    <string name="mp_c_desc">User Profile icon</string>
+    <string name="mp_temp_bonus">You\'ve Received ₹100 Bonus</string>
+
+    <string name="scan_barcode">Scan Barcode</string>
+    <string name="scan_prod">Scan Barcode for Product</string>
+    <string name="scan_store">Scan QRCode for the Store</string>
+    <string name="bs_exit_store_msg">If you Exit, all items from your Cart will be removed. </string>
+    <string name="bs_exit_in_store_msg">This will result in emptying your Cart. Do you still want to continue?</string>
+    <string name="bs_exit_yes">Yes</string>
+    <string name="bs_exit_no">No</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_my_profile">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_logout">Logout</string>
+    <string name="action_settings">Settings</string>
+    <string name="mp_profile">My Profile</string>
+    <string name="mp_change_city">Change City</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="menu_about_us">About Us</string>
+    <string name="menu_terms_cond">Terms and Conditions</string>
+    <string name="menu_contact">Contact Us</string>
+    <string name="menu_privacy_policy">Privacy Policy</string>
+    <string name="menu_refund_policy">Refund Policy</string>
+    <string name="menu_store">Store</string>
+    <string name="menu_1_title">General</string>
+    <string name="na_ver">Version</string>
+    <string name="na_refund_and_return">Refund &amp; Return</string>
+
+    <string name="go_to_basket">Basket</string>
+    <string name="start_shop">Start Shopping</string>
+
+    <string name="ref_success">Referral Number Verified Successfully</string>
+
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+    <string name="default_notification_channel_name" translatable="true">Noq</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="fcm_message">FCM Message</string>
+
+    <string name="verified">Verification successful</string>
+    <string name="failed">Verification failed</string>
+
+    <string name="otp_msg">is your NoQ Verification Code.Don\'t Share it with other people.The code is valid for only 5 minutes.</string>
+
+    <!-- ShopDetails Strings Resources   -->
+    <string name="shop_details_header">QR Scan Success at : </string>
+    <string name="shop_details_main">Today you are shopping in :</string>
+    <string name="sd_covid_19">100% Contact Free Solution</string>
+    <string name="sd_school">You have chosen </string>
+    <string name="sd_btn">Start Payment</string>
+
+    <!-- ProductDetails Strings Resources   -->
+    <string name="prod_detail">Product Details</string>
+    <string name="gst_info">All Prices are inclusive of GST</string>
+    <string name="cont_desc">Product Image</string>
+    <string name="b_code">Barcode</string>
+    <string name="p_name">Product Name</string>
+    <string name="mrp">MRP</string>
+    <string name="retail_p">Retailer\'s Price</string>
+    <string name="our_p">Our Price</string>
+    <string name="tot_disc">Total Discount</string>
+    <string name="img_1_desc">Add Quantity</string>
+    <string name="img_2_desc">Decrease Quantity</string>
+    <string name="qty">Quantity</string>
+    <string name="pd_go_to_basket">Go to Basket</string>
+    <string name="add_to_b">Add to Basket</string>
+    <string name="cancel">Cancel</string>
+    <string name="pd_add_more">Add More</string>
+
+    <!--  CartActivity Resources  -->
+    <string name="heading">Your Basket</string>
+    <string name="ac_total">Total</string>
+    <string name="ca_qty">Qty</string>
+    <string name="ca_price">Price</string>
+    <string name="ca_item_qty">Item(s)</string>
+    <string name="ca_referral_amt">Referral Credits</string>
+    <string name="ca_final_amt">Final Amount :</string>
+    <string name="ca_scan">Scan More</string>
+    <string name="ca_add_more">Add More</string>
+    <string name="ca_pay">Checkout</string>
+    <string name="payment">Checkout</string>
+    <string name="delete">Delete</string>
+    <string name="comm">Comments : </string>
+    <string name="ca_go_bscan">Scan\n More</string>
+    <string name="ca_min_warning">Min. Amount Required for Home Delivery is </string>
+
+    <!--  AboutUs Resources  -->
+    <string name="as_title">About Us</string>
+    <string name="as_desc1">We at RadiateLabs are on a mission to eliminate queues from the Retail Shops, because we understand that queuing up for kiosks is the most obsolete way of paying for items that you need.\nThrough our new app – NoQ, we enable customers to use their Smartphones to pay for items so that they can spend more time consuming, and less time buying.</string>
+
+    <!--  ContactUs Resources  -->
+    <string name="cs_title">Contact Us</string>
+    <string name="cs_desc">Email : \nnoq@radiatelabs.com\nCompany Website : \nhttps://www.radiatelabs.com\nProduct Website : \nhttps://www.younoq.com\nPhone : \n+91 9158911702\nOur Phone Lines are Open 9 AM to 5 PM Everyday\nWe keep checking our email 24/7</string>
+
+    <!--  RefundPolicy Resources  -->
+    <string name="rp_title">Refund Policy</string>
+    <string name="rp_desc">Our focus is complete customer satisfaction. In the event, if you are displeased with a product bought, the refund and return policy of the retailer from where
+        you made the purchase would be used.</string>
+    <string name="rp_h1">Refund Policy</string>
+    <string name="rp_h1_desc1">The invoice sent to the phone number by message would be used as a bill for any refund request.\nPlease take the invoice message to the retailer and discuss with them any returns and refunds.\nThe User is responsible for understanding the Return &amp; Refund policy of the retailer before making any purchase,
+        as RadiateLabs would not be responsible for any damages.\nThe return would be made to the suitable payment form as deemed by the retailer, RadiateLabs will not be involved in
+        any discussion related to any return and refund request.</string>
+    <string name="title_activity_test_policy">TestPolicy</string>
+
+    <!-- Payment Successful Activity -->
+    <string name="ps_succ">Payment Successful</string>
+    <string name="pf_fail">Payment Failed</string>
+    <string name="ps_pay_method">Payment Method</string>
+    <string name="ps_order_type">Order Type</string>
+    <string name="ps_thanks">Thank you for shopping with us!</string>
+    <string name="ps_desc">You could now leave the store\n As per Your Convenience.</string>
+    <string name="ps_school">You\'ve Successfully Paid your Dues.</string>
+    <string name="ps_scan">Continue</string>
+    <string name="ps_profile">Home</string>
+    <string name="pf_desc">Please Try Again!</string>
+    <string name="pf_retry">Retry</string>
+    <string name="ps_total_amt">Amount Paid</string>
+    <string name="ps_savings_by_us">You Saved</string>
+    <string name="ps_receipt">Receipt No.</string>
+    <string name="ps_tot_price">Total Our Price : </string>
+    <string name="ps_tot_retail_price">Total Retail Price</string>
+    <string name="ps_ref_amt">Referral Used</string>
+    <string name="ps_purchased_Items">Purchased Items</string>
+    <string name="ps_no_of_items">No. of Items</string>
+    <string name="ps_in_store">In Store</string>
+    <string name="ps_home_delivery">Home Delivery</string>
+    <string name="ps_takeaway_desc">You can collect your order in 30 minutes</string>
+
+    <!-- My Profile Activity -->
+    <string name="ns_header">We are Currently\nAvailable At</string>
+    <string name="ns_mp_name">Available In Stores</string>
+    <string name="ns_mp_btn">Go Back</string>
+    <string name="ns_title">Profile</string>
+    <string name="ns_help">Choose a Category</string>
+    <string name="ns_tot_savings">Total Savings</string>
+    <string name="ns_referral_bonus">Referral Bonus</string>
+    <string name="ns_phone">Phone No.</string>
+    <string name="ns_email">Email</string>
+    <string name="ns_logout">Logout</string>
+    <string name="mp_ab">Alcohol &amp; Beverages</string>
+    <string name="mp_dairy">Dairy &amp; Bakery</string>
+    <string name="mp_grocery">Grocery</string>
+    <string name="mp_school">School Payments</string>
+    <string name="mp_stationary">Books, Stationary &amp; Art</string>
+    <string name="mp_meat">Meat &amp; Poultry</string>
+
+    <!-- Slides Activity -->
+    <string name="ia_get_started">Get Started</string>
+
+    <!-- Slide First Fragment -->
+    <string name="sff_header">Fed Up of Waiting\nIn Queues?</string>
+    <string name="sff_desc">We have a solution for You</string>
+
+    <!-- Slide Second Fragment -->
+    <string name="ssf_desc">100% Contactless solution</string>
+    <string name="ssf_step1">If shopping in the store, scan the product\'s barcode and add them to basket</string>
+    <string name="ssf_step2">If shopping as takeaway, order from home and collect from the store at your convenience, or we will home deliver to you</string>
+    <string name="ssf_step3">By using NoQ you don\'t have to queue up for the bill payment or getting your products</string>
+
+    <!-- Slide Third Fragment -->
+    <string name="stf_header">You\'re all Set!</string>
+    <string name="stf_desc">Let\'s get You Registered!</string>
+
+    <string name="ss_title">Shopping Redefined</string>
+
+    <!-- LastFiveTxns Activity -->
+    <string name="lft_header">Transactions</string>
+    <string name="lft_nav_profile">Last Five Transactions</string>
+    <string name="lft_onclick">Click on Transactions to View more Details.</string>
+
+    <!-- TxnDetails Activity -->
+    <string name="td_amt">Paid : </string>
+    <string name="td_paid_to">To : </string>
+    <string name="td_cart_item">Purchased Items</string>
+    <string name="td_payment_mode">Payment Mode</string>
+    <string name="td_receipt_no">Receipt No</string>
+    <string name="td_items">Items</string>
+    <string name="td_expand_info">(Tap on an Item to view Details)</string>
+    <string name="td_date">Date : </string>
+    <string name="td_tot_price">Amt. Paid</string>
+    <string name="td_you_saved">You Saved</string>
+
+    <!-- TxnCard Activity -->
+    <string name="tc_paid">Paid for </string>
+    <string name="tc_no_items">Total Items :</string>
+
+    <!-- TxnDetails Card Activity -->
+    <string name="tdc_b_code">Barcode</string>
+    <string name="tdc_no_items">No. of Items</string>
+    <string name="tdc_retailer_price">Retailer Price</string>
+    <string name="tdc_our_price">Our Price</string>
+    <string name="tdc_td">Total Discount</string>
+
+    <!-- Covid19 Activity -->
+    <string name="c19_h1">In this time, we stand together with you.</string>
+    <string name="c19_h2">For Covid-19 updates please visit the following link : </string>
+    <string name="c19_h6">https://www.mohfw.gov.in/</string>
+    <string name="c19_h3">Stay safe with your family by taking necessary precautions.</string>
+    <string name="c19_h5">We understand the gravity of the situation and your need to buy groceries, with NoQ you can experience a contactless In-store shopping option or can order at home and take away from the store at your convenience. </string>
+    <string name="c19_h4">100% contact free solution</string>
+    <string name="c19_desc">COVID-19\nRESPONSE</string>
+
+    <!-- Activity Products List Activity -->
+    <string name="apl_btn_basket">Cart</string>
+    <string name="apl_available">Available Items</string>
+    <string name="pla_in_stock">In Stock</string>
+    <string name="pla_out_of_stock">Out of Stock</string>
+
+    <!-- ChooseShopType -->
+    <string name="cst_header">How do you want to shop today?</string>
+    <string name="cst_home_delivery">Home Delivery</string>
+    <string name="cst_home_delivery_desc">Place you order via the app and get your items delivered at your doorstep.</string>
+    <string name="cst_takeaway">Takeaway</string>
+    <string name="cst_takeaway_desc">Place order from the app and collect your items from the shop.</string>
+    <string name="cst_in_shop">In-Store Shopping</string>
+    <string name="cst_in_shop_desc">Scan Products via app make payments and leave without the hassle of a Queue</string>
+    <string name="cst_show_interest">Interested Click Here</string>
+    <string name="cst_coming_soon">Coming Soon</string>
+    <string name="cst_in_school">In-School Payment</string>
+    <string name="cst_in_school_desc">Just Scan the requested amount and make payments directly to School.</string>
+    <string name="cst_partner_delivery">Partner Delivery</string>
+    <string name="cst_partner_delivery_desc">Prepare the Order that has been made from third party delivery services with NoQ.</string>
+    <string name="cst_zomato_text">zomato</string>
+    <string name="cst_pd_desc">This is an interim Order.</string>
+    <string name="cst_noq_text">NoQ</string>
+    <string name="cst_make_bill">Make a Bill</string>
+    <string name="cst_m_bill_desc">Make a Bill for an order already placed by a delivery partner.</string>
+
+    <!-- MainActivity -->
+    <string name="ma_header">Shopping Redefined</string>
+    <string name="ma_footer">\u00a9 Radiate Labs</string>
+    <string name="ma_enter_phone">Enter Phone no.</string>
+
+    <!-- Products Category -->
+    <string name="apc_header">Categories</string>
+
+    <!-- CitySelect Activity -->
+    <string name="acs_header">Choose your City</string>
+
+    <string name="sn_header">Choose a Store</string>
+
+    <!-- UserAddress Activity -->
+    <string name="aua_header">Please enter your address</string>
+    <string name="aua_desc">So that we can send your order to your doorstep</string>
+    <string name="aua_add_address">Add Address</string>
+    <string name="aua_address">Address</string>
+
+    <!-- DeliveryDetails Activity -->
+    <string name="dd_header">Select a Delivery Address</string>
+    <string name="dd_change">Edit</string>
+    <string name="dd_cont_shop">Continue Shopping</string>
+
+    <!-- ChoosePartnerDelivery -->
+    <string name="cpd_header">Choose delivery partner</string>
+
+    <!-- BonusAmtDialog -->
+    <string name="bonus_amt">₹100</string>
+    <string name="bad_desc">Bonus have been credited to your account!</string>
+    <string name="bad_congrats">Congratulations !</string>
+
+    <!-- PaymentMethod Activity -->
+    <string name="pm_header">Choose Payment Method</string>
+    <string name="pm_cash_desc">Pay by Cash</string>
+    <string name="pm_pay">Pay ₹5000</string>
+
+    <!-- ReturnAndRefund Activity -->
+    <string name="rar_header">Refund &amp; Return</string>
+    <string name="rar_btn">Contact Us</string>
+
+</resources>

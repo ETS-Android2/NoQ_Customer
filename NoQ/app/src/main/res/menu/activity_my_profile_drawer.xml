@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="none">
+<!--        <item-->
+<!--            android:id="@+id/nav_cart"-->
+<!--            android:icon="@drawable/ic_cart"-->
+<!--            android:title="@string/go_to_basket" />-->
+<!--        <item-->
+<!--            android:id="@+id/nav_store"-->
+<!--            android:icon="@drawable/ic_store"-->
+<!--            android:title="@string/menu_store" />-->
+
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/profile"
+            android:title="@string/mp_profile" />
+        <item
+            android:id="@+id/nav_last_five_txns"
+            android:icon="@drawable/ic_transaction"
+            android:title="@string/lft_nav_profile" />
+
+<!--        <item-->
+<!--            android:id="@+id/nav_tools"-->
+<!--            android:icon="@drawable/ic_menu_manage"-->
+<!--            android:title="@string/menu_tools" />-->
+    </group>
+
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/nav_about_us"
+            android:icon="@drawable/ic_about_us"
+            android:title="@string/menu_about_us" />
+
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/ic_contact_us"
+            android:title="@string/menu_contact" />
+        <item
+            android:id="@+id/nav_terms_cond"
+            android:icon="@drawable/ic_term"
+            android:title="@string/menu_terms_cond" />
+
+        <item
+            android:id="@+id/nav_privacy_policy"
+            android:icon="@drawable/ic_privacy"
+            android:title="@string/menu_privacy_policy" />
+
+        <item
+            android:id="@+id/nav_refund_policy"
+            android:icon="@drawable/ic_refund"
+            android:title="@string/menu_refund_policy" />
+
+    </group>
+
+    <group>
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_exit"
+            android:title="@string/nav_logout" />
+
+<!--        <item-->
+<!--            android:id="@+id/nav_version"-->
+<!--            android:title="@string/na_ver" />-->
+
+    </group>
+
+<!--    <item android:title="About NoQ">-->
+
+<!--        <menu>-->
+
+<!--        </menu>-->
+
+
+<!--    </item>-->
+
+</menu>

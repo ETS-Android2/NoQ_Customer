@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/primaryLightColor"
+    tools:context=".views.ShopDetails">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#FFF"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/icon_covid"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:text="@string/sd_covid_19"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/qr"/>
+
+    <TextView
+        android:id="@+id/sd_h1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/shop_details_header"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:textColor="@color/primaryTextColor"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+<!--    <TextView-->
+<!--        android:id="@+id/sd_h2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/shop_details_main"-->
+<!--        android:fontFamily="@font/aclonica"-->
+<!--        android:textSize="16sp"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="@color/primaryTextColor"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        />-->
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="18dp">
+
+        <!-- Card contents. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/shop"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
+                android:id="@+id/sd_et1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:inputType="none"
+                android:textSize="20sp"
+                android:textColor="@color/secondaryTextColor"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="18dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/primaryDarkColor"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <!-- Card contents. -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/map"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/sd_et2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:textAlignment="center"
+                            android:inputType="none"
+                            android:textSize="16sp"
+                            android:textColor="@color/secondaryTextColor"
+                            android:layout_gravity="center_horizontal"
+                            />
+
+                        <TextView
+                            android:id="@+id/sd_et3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:inputType="none"
+                            android:textSize="16sp"
+                            android:textColor="@color/secondaryTextColor"
+                            android:layout_gravity="center_horizontal"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sd_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button"
+        app:cornerRadius="20dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/start_shop"
+        android:onClick="startShopping"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:backgroundTint="@color/primaryDarkColor"
+        android:textAllCaps="false"
+        android:layout_gravity="center_horizontal"
+        />
+
+</LinearLayout>

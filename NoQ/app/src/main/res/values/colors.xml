@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryLightColor">#393E46</color>
+    <color name="primaryDarkColor">#00DCFF</color>
+    <!--<color name="secondaryColor">#9c27b0</color>-->
+    <color name="secondaryLightColor">#d05ce3</color>
+    <color name="secondaryDarkColor">#6a0080</color>
+    <color name="colorAccent">#3e2723</color>
+    <color name="secondaryTextColor">#393E46</color>
+
+    <color name="primaryColor">#212121</color>
+    <color name="secondaryColor">#1B9EC5</color>
+    <color name="primaryTextColor">#52DE97</color>
+    <color name="ckout_d">#ef5350</color>
+    <color name="ckout_e">#FF8F00</color>
+    <color name="swiggy_gold">#FC8019</color>
+    <color name="zomato_color">#F05050</color>
+    <color name="other_color">#2196F3</color>
+    <color name="BLUE">#039BE5</color>
+    <color name="WHITE">#FFF</color>
+
+</resources>
