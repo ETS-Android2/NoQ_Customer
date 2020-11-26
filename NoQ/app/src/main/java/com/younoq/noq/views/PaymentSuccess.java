@@ -15,6 +15,10 @@ import com.younoq.noq.models.DBHelper;
 import com.younoq.noq.models.Logger;
 import com.younoq.noq.models.SaveInfoLocally;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -38,6 +42,8 @@ public class PaymentSuccess extends AppCompatActivity {
     private DBHelper db;
     private Bundle txnReceipt;
     private ArrayList<String> txnData;
+    private JSONObject jobj1, jobj2;
+    private JSONArray jsonArray;
 //    ReceiptAdapter receiptAdapter;
 //    RecyclerView recyclerView;
     SimpleDateFormat inputDateFormat, outputDateFormat, timeFormat;
@@ -116,13 +122,44 @@ public class PaymentSuccess extends AppCompatActivity {
 
     }
 
+    public void fetch_referral_amt(){
+
+        final String type = "retrieve_referral_amt";
+        final String phone = saveInfoLocally.getPhone();
+        try {
+
+            final String res = new AwsBackgroundWorker(this).execute(type, phone).get();
+            String ref_bal;
+            try
+            {
+                jsonArray = new JSONArray(res);
+                jobj1 = jsonArray.getJSONObject(0);
+                if(!jobj1.getBoolean("error")){
+                    jobj2 = jsonArray.getJSONObject(1);
+                    ref_bal = jobj2.getString("referral_balance");
+                    Log.d(TAG, "Referral Amount Balance : "+ref_bal);
+                    // Saving the Referral_Amount_Balance to SharedPreferences to be used in CartActivity/
+                    saveInfoLocally.setReferralBalance(ref_bal);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private void showPaymentDetails() {
 
         // Resetting the TotalItemsInCart in SharedPreferences.
         saveInfoLocally.setTotalItemsInCart(0);
 
+        fetch_referral_amt();
         // Setting the Updated Referral_Balance to SharedPreferences.
-        saveInfoLocally.setReferralBalance(String.valueOf(calc_referral_bal));
+//        saveInfoLocally.setReferralBalance(String.valueOf(calc_referral_bal));
 
         final String sid = saveInfoLocally.get_store_id();
         if (sid.equals("3")) {

@@ -3,6 +3,7 @@ package com.younoq.noq.views;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,9 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.younoq.noq.R;
+import com.younoq.noq.models.AwsBackgroundWorker;
 import com.younoq.noq.models.BackgroundWorker;
 import com.younoq.noq.models.SaveInfoLocally;
 import com.younoq.noq.views.MainActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 
@@ -24,6 +30,8 @@ public class UserProfile extends AppCompatActivity {
 
     TextView tv_im_name, tv_name, tv_email, tv_referral_amt, tv_total_savings, tv_phone_no;
     SaveInfoLocally saveInfoLocally;
+    private JSONObject jobj1, jobj2;
+    private JSONArray jsonArray;
 
     public final String TAG = "NoQStores";
     public String phone;
@@ -42,6 +50,7 @@ public class UserProfile extends AppCompatActivity {
 
         saveInfoLocally = new SaveInfoLocally(this);
 
+        fetch_referral_amt();
         // Fetching the User Details
         fetch_User_Details();
 
@@ -72,6 +81,36 @@ public class UserProfile extends AppCompatActivity {
         }
 
         tv_im_name.setText(na);
+
+    }
+
+    public void fetch_referral_amt(){
+
+        final String type = "retrieve_referral_amt";
+        final String phone = saveInfoLocally.getPhone();
+        try {
+
+            final String res = new AwsBackgroundWorker(this).execute(type, phone).get();
+            String ref_bal;
+            try
+            {
+                jsonArray = new JSONArray(res);
+                jobj1 = jsonArray.getJSONObject(0);
+                if(!jobj1.getBoolean("error")){
+                    jobj2 = jsonArray.getJSONObject(1);
+                    ref_bal = jobj2.getString("referral_balance");
+                    Log.d(TAG, "Referral Amount Balance : "+ref_bal);
+                    // Saving the Referral_Amount_Balance to SharedPreferences to be used in CartActivity/
+                    saveInfoLocally.setReferralBalance(ref_bal);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

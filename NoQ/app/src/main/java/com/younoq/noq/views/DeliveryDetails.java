@@ -51,7 +51,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DeliveryDetails extends AppCompatActivity {
 
-    private TextView tv_user_address, tv_delivery_duration, tv_total_amt, tv_ref_amt, tv_delivery_charges, tv_final_amt, tv_discounted_amt, tv_max_delivery_charge;
+    private TextView tv_user_address, tv_delivery_duration, tv_total_amt, tv_ref_amt, tv_delivery_charges, tv_final_amt, tv_final_disp_amt, tv_max_delivery_charge;
     private String total_amt, ref_amt, user_addr, txnAmount, tot_retailer_price, tot_our_price, total_discount, total_mrp;
     private String category_name, shoppingMethod, coming_from;
     private int min_charge, max_charge, delivery_charge, item_qty = 0, delivery_duration;
@@ -80,7 +80,7 @@ public class DeliveryDetails extends AppCompatActivity {
         tv_delivery_charges = findViewById(R.id.dd_delivery_charges);
         tv_final_amt = findViewById(R.id.dd_final_amt);
         edit_address = findViewById(R.id.dd_edit_address);
-        tv_discounted_amt = findViewById(R.id.dd_discounted_amt);
+        tv_final_disp_amt = findViewById(R.id.dd_final_disp_amt);
         free_homeDelivery_linearlayout = findViewById(R.id.dd_free_hd_linearlayout);
         tv_max_delivery_charge = findViewById(R.id.dd_max_charge);
         btn_payment = findViewById(R.id.dd_payment_button);
@@ -210,9 +210,6 @@ public class DeliveryDetails extends AppCompatActivity {
 
         Log.d(TAG, "Referral Bal Used : "+ref_bal_used);
 
-        final String tpm = "₹" + final_amt;
-        tv_discounted_amt.setText(tpm);
-
         // Retrieving the Delivery related info from the SharedPreferences.
         delivery_charge = 0;
         min_charge = saveInfoLocally.getMinCharge();
@@ -240,6 +237,8 @@ public class DeliveryDetails extends AppCompatActivity {
         final_amt += delivery_charge;
         final String fin_amt = "₹" + final_amt;
         tv_final_amt.setText(fin_amt);
+
+        tv_final_disp_amt.setText(fin_amt);
 
         if (final_amt > 0)
             btn_payment.setText(R.string.cont);

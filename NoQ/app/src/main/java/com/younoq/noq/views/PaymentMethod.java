@@ -434,9 +434,13 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
             in.putExtra("shoppingMethod", shoppingMethod);
         } else if(shoppingMethod.equals("Takeaway") || shoppingMethod.equals("HomeDelivery")){
             in  = new Intent(this, CartActivity.class);
-            in.putExtra("comingFrom", "Cart");
+            if(coming_from.equals("ProductCategory")){
+                in.putExtra("comingFrom", "ProductCategory");
+            } else {
+                in.putExtra("comingFrom", "ProductList");
+                in.putExtra("category_name", category_name);
+            }
             in.putExtra("shoppingMethod", shoppingMethod);
-            in.putExtra("category_name", category_name);
         } else{
             in = new Intent();
         }

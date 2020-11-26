@@ -3,46 +3,39 @@ package com.younoq.noq.views;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.younoq.noq.R;
+import com.younoq.noq.adapters.BottomSheetCategoryAdapter;
+import com.younoq.noq.adapters.ProductListAdapter;
+import com.younoq.noq.classes.Category;
+import com.younoq.noq.classes.Product;
+import com.younoq.noq.classes.ProductSearchResult;
+import com.younoq.noq.classes.ResponseResult;
+import com.younoq.noq.models.AwsBackgroundWorker;
+import com.younoq.noq.models.RxSearchObservable;
+import com.younoq.noq.models.SaveInfoLocally;
+import com.younoq.noq.networkhandler.NetworkHandler;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.younoq.noq.R;
-import com.younoq.noq.adapters.BottomSheetCategoryAdapter;
-import com.younoq.noq.adapters.ProductListAdapter;
-import com.younoq.noq.adapters.SearchSuggestionsAdapter;
-import com.younoq.noq.classes.Category;
-import com.younoq.noq.classes.Product;
-import com.younoq.noq.classes.ProductSearchResult;
-import com.younoq.noq.classes.ProductSearchResultLight;
-import com.younoq.noq.classes.ResponseResult;
-import com.younoq.noq.classes.SearchSuggestions;
-import com.younoq.noq.models.AwsBackgroundWorker;
-import com.younoq.noq.models.RxSearchObservable;
-import com.younoq.noq.models.SaveInfoLocally;
-import com.younoq.noq.networkhandler.NetworkHandler;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -56,51 +49,40 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by Harsh Chaurasia(Phantom Boy).
- */
-
-public class ProductsList extends AppCompatActivity {
-
-    TextView tv_store_name, tv_category_name;
-    String store_id, store_name, category_name, shoppingMethod, coming_from;
-    Button btn_categories;
+public class ProductsSearchResults extends AppCompatActivity {
+    private String store_id, search_string, shoppingMethod, coming_from, store_name;
+    private BottomSheetCategoryAdapter categoryAdapter;
+    private RecyclerView recyclerView, bs_recyclerview;
+    private List<Category> categoriesList;
     private CoordinatorLayout coordinatorLayout;
-    private String TAG ="ProductList";
-    SaveInfoLocally saveInfoLocally;
-    JSONArray jsonArray, jsonArray1, jsonArray2;
-    JSONObject jobj;
-    List<Product> productList;
-    RecyclerView recyclerView, bs_recyclerview;
-    ProductListAdapter productListAdapter;
-    private LinearLayout layout_bottomsheet, ll_category;
-    BottomSheetBehavior sheetBehavior;
-    List<Category> categoriesList;
-    BottomSheetCategoryAdapter categoryAdapter;
-    private ImageView im_search_icon;
+    private ProductListAdapter productListAdapter;
+    private BottomSheetBehavior sheetBehavior;
+    private final String TAG ="ProductList";
+    private LinearLayout layout_bottomsheet;
+    private JSONArray jsonArray, jsonArray1;
+    private SaveInfoLocally saveInfoLocally;
+    private List<Product> productList;
+    private TextView tv_store_name;
+    private Button btn_categories;
     private SearchView searchView;
     private Disposable disposable;
-    private static String categoryName = "";
-    private static int firstVisiblePosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products_list);
+        setContentView(R.layout.activity_products_search_results);
 
-        tv_store_name = findViewById(R.id.apl_store_name);
-        tv_category_name = findViewById(R.id.apl_category_name);
-        saveInfoLocally = new SaveInfoLocally(this);
-        recyclerView = findViewById(R.id.apl_recycler_view);
+        recyclerView = findViewById(R.id.cpsr_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        btn_categories = findViewById(R.id.apc_btn_categories);
-        coordinatorLayout = findViewById(R.id.cpl_coordinator_layout);
+        btn_categories = findViewById(R.id.asc_btn_categories);
+        searchView = findViewById(R.id.cpsr_search_view);
 
-        categoriesList = new ArrayList<>();
-        ll_category = findViewById(R.id.cpl_category_linear_layout);
-        im_search_icon = findViewById(R.id.cpl_search_icon);
-        searchView = findViewById(R.id.cpl_search_view);
+        coordinatorLayout = findViewById(R.id.cpsr_coordinator_layout);
+        saveInfoLocally = new SaveInfoLocally(this);
+        tv_store_name = findViewById(R.id.cpsr_store_name);
+        categoriesList= new ArrayList<>();
+        productList = new ArrayList<>();
 
         bs_recyclerview = findViewById(R.id.bd_bottomsheet_recyclerview);
         bs_recyclerview.setHasFixedSize(true);
@@ -109,14 +91,13 @@ public class ProductsList extends AppCompatActivity {
         sheetBehavior = BottomSheetBehavior.from(layout_bottomsheet);
 
         Intent in= getIntent();
-        category_name = in.getStringExtra("category_name");
+        search_string = in.getStringExtra("search_string");
         shoppingMethod = in.getStringExtra("shoppingMethod");
         coming_from = in.getStringExtra("coming_from");
+        searchView.setQuery(search_string, false);
+        searchView.setFocusable(true);
 
         retrieve_categories();
-
-        final String queryHint = "Search in \"" + category_name + "\"";
-        searchView.setQueryHint(queryHint);
 
         sheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -150,44 +131,19 @@ public class ProductsList extends AppCompatActivity {
             public void onClick(View v) {
                 if (sheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
                     sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-//                    Log.d(TAG, "Expanding BottomSheet");
                 } else {
                     sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-//                    Log.d(TAG, "Collapsing BottomSheet");
                 }
             }
         });
-
-        im_search_icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchView.setVisibility(View.VISIBLE);
-                ll_category.setVisibility(View.GONE);
-            }
-        });
-
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                Log.d(TAG, "Close Button Clicked");
-//                im_search_icon.setVisibility(View.VISIBLE);
-//                searchView.setVisibility(View.GONE);
-//                productList.clear();
-//                productListAdapter.notifyDataSetChanged();
-//                retrieve_products_list();
-                return true;
-            }
-        });
-
-        productList = new ArrayList<>();
 
         store_id = saveInfoLocally.get_store_id();
         store_name = saveInfoLocally.getStoreName() +", "+ saveInfoLocally.getStoreAddress();
         tv_store_name.setText(store_name);
 
-        tv_category_name.setText(category_name);
-
-        retrieve_products_list();
+        productListAdapter = new ProductListAdapter(getApplicationContext(), productList, shoppingMethod, coordinatorLayout);
+        recyclerView.setAdapter(productListAdapter);
+        retrieve_search_results(search_string);
 
     }
 
@@ -200,34 +156,14 @@ public class ProductsList extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (disposable != null) {
+        if (disposable != null){
             disposable.dispose();
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        firstVisiblePosition = ((LinearLayoutManager)
-                Objects.requireNonNull(recyclerView.getLayoutManager())).findFirstVisibleItemPosition();
-        categoryName = category_name;
-        Log.d(TAG, "in onPause : firstVisiblePosition : "+firstVisiblePosition);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (!categoryName.equals(category_name)) {
-            Log.d(TAG, "Previous Category : "+categoryName+", Current Category : "+category_name);
-            firstVisiblePosition = 0;
-        }
-        Log.d(TAG, "in onResume : firstVisiblePosition : "+firstVisiblePosition);
-        recyclerView.scrollToPosition(firstVisiblePosition);
-    }
-
     void retrieve_categories() {
 
-        final String store_id = saveInfoLocally.get_store_id();
+        store_id = saveInfoLocally.get_store_id();
         final String type= "retrieve_categories";
         try {
             final String res = new AwsBackgroundWorker(this).execute(type, store_id).get();
@@ -261,56 +197,11 @@ public class ProductsList extends AppCompatActivity {
 
     }
 
-    void retrieve_products_list() {
-
-        final String type = "retrieve_products_list";
-        try {
-            final String res = new AwsBackgroundWorker(this).execute(type, store_id, category_name).get();
-            Log.d(TAG, "Products list : "+res);
-
-            jsonArray2 = new JSONArray(res);
-
-            for(int i = 0; i < jsonArray2.length(); i++){
-
-                jobj = jsonArray2.getJSONObject(i);
-//                Log.d(TAG, "Item - "+i+" "+jsonArray1.getString(0));
-                productList.add(
-                        new Product(
-                                0,
-                                jobj.getString("store_id"),
-                                jobj.getString("barcode"),
-                                jobj.getString("product_name"),
-                                jobj.getString("mrp"),
-                                jobj.getString("retailer_price"),
-                                "0",
-                                jobj.getString("our_price"),
-                                jobj.getString("total_discount"),
-                                "0",
-                                jobj.getString("has_image"),
-                                jobj.getString("quantity"),
-                                jobj.getString("category"),
-                                shoppingMethod
-                        )
-                );
-
-            }
-
-            productListAdapter = new ProductListAdapter(this, productList, shoppingMethod, coordinatorLayout);
-            recyclerView.setAdapter(productListAdapter);
-
-
-        } catch (ExecutionException | JSONException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     private void retrieve_search_results(String queryString) {
-//        search_string = queryString;
+        search_string = queryString;
         RequestBody body = RequestBody.create(queryString, MediaType.parse("text/plain"));
         RequestBody storeId = RequestBody.create(store_id, MediaType.parse("text/plain"));
-        RequestBody catName = RequestBody.create(category_name, MediaType.parse("text/plain"));
-        Call<ProductSearchResult> call =  NetworkHandler.getNetworkHandler(getApplicationContext()).getNetworkApi().getSearchResultsByCategory(body, storeId, catName);
+        Call<ProductSearchResult> call =  NetworkHandler.getNetworkHandler(getApplicationContext()).getNetworkApi().getSearchResults(body, storeId);
 
         call.enqueue(new Callback<ProductSearchResult>() {
 
@@ -329,20 +220,20 @@ public class ProductsList extends AppCompatActivity {
                             List<String> pList = iter.next();
                             productList.add(
                                     new Product(
-                                            0,
-                                            pList.get(1),
-                                            pList.get(0),
-                                            pList.get(3),
-                                            pList.get(5),
-                                            pList.get(7),
-                                            "0",
-                                            pList.get(10),
-                                            pList.get(11),
-                                            "0",
-                                            pList.get(15),
-                                            pList.get(16),
-                                            pList.get(17),
-                                            shoppingMethod
+                                    0,
+                                    pList.get(1),
+                                    pList.get(0),
+                                    pList.get(3),
+                                    pList.get(5),
+                                    pList.get(7),
+                                    "0",
+                                    pList.get(10),
+                                    pList.get(11),
+                                    "0",
+                                    pList.get(15),
+                                    pList.get(16),
+                                    pList.get(17),
+                                    shoppingMethod
                                     )
                             );
                             productListAdapter.notifyDataSetChanged();
@@ -384,30 +275,21 @@ public class ProductsList extends AppCompatActivity {
 
     public void Go_to_Basket(View view) {
         Intent in = new Intent(this, CartActivity.class);
-        in.putExtra("category_name", category_name);
-        in.putExtra("comingFrom", "ProductList");
+        in.putExtra("search_string", search_string);
+        in.putExtra("comingFrom", "ProductsSearchResults");
         in.putExtra("shoppingMethod", shoppingMethod);
-        startActivity(in);
-    }
-
-    public void Go_to_Profile(View view) {
-        final String phone = saveInfoLocally.getPhone();
-        Intent in = new Intent(this, MyProfile.class);
-        in.putExtra("Phone", phone);
         startActivity(in);
     }
 
     @Override
     public void onBackPressed() {
-        Intent in = new Intent(this, ProductsCategory.class);
-        in.putExtra("shoppingMethod", shoppingMethod);
-        startActivity(in);
-//        if(coming_from.equals("Cart")){
-//            Intent in = new Intent(this, ProductsCategory.class);
-//            in.putExtra("shoppingMethod", shoppingMethod);
-//            startActivity(in);
-//        } else {
-//            super.onBackPressed();
-//        }
+        if (coming_from.equals("Cart")){
+            Intent in = new Intent(ProductsSearchResults.this, ProductsCategory.class);
+            in.putExtra("shoppingMethod", shoppingMethod);
+            startActivity(in);
+        } else {
+            super.onBackPressed();
+        }
     }
+
 }
