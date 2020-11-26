@@ -256,10 +256,10 @@ public class OTPConfirmActivity extends AppCompatActivity {
         // Storing the Logs in the Logger.
         logger.writeLog(TAG, "OnResend()","OnResend() Func. called\n");
 
-//        otp_pin = generatePIN();
-        otp_pin = "0070";
-//        otp.setText("");
-//        otp.setError(null);
+        otp_pin = generatePIN();
+//        otp_pin = "0070";
+        otp.setText("");
+        otp.setError(null);
 
         Log.d(TAG, "Phone No. in OnResend : "+phone);
 
