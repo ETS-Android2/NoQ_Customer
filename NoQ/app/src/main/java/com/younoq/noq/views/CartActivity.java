@@ -52,6 +52,7 @@ public class CartActivity extends AppCompatActivity {
     ArrayList<String> txnData;
     private String shoppingMethod, category_name, coming_from;
     private Logger logger;
+    private String search_str;
 
     JSONArray jsonArray;
     JSONObject jobj1, jobj2;
@@ -68,7 +69,7 @@ public class CartActivity extends AppCompatActivity {
     private double total_retail_price = 0.0;
     private double total_our_price = 0.0;
     private double total_discount = 0.0;
-    private static int item_qty = 0, min_charge;
+    private int item_qty = 0, min_charge;
     private DecimalFormat df = new DecimalFormat("###.##");
     String txnAmount;
     private String comment = "";
@@ -188,7 +189,7 @@ public class CartActivity extends AppCompatActivity {
         scan_product = findViewById(R.id.ac_scan_product);
         items_qty = findViewById(R.id.ca_item_qty);
 //        comm = findViewById(R.id.ca_comm);
-//
+
         recyclerView = findViewById(R.id.ac_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -205,6 +206,11 @@ public class CartActivity extends AppCompatActivity {
             category_name = in.getStringExtra("category_name");
             Log.d(TAG, "Category Name in onCreate : "+category_name);
             scan_product.setText(R.string.ca_add_more);
+            if (coming_from.equals("ProductsSearchResults")){
+                search_str = in.getStringExtra("search_string");
+                Log.d(TAG, "Search_Str : "+search_str);
+            }
+
         }
 
         if(shoppingMethod.equals("HomeDelivery")){
@@ -223,27 +229,6 @@ public class CartActivity extends AppCompatActivity {
 
         final String TAG = "CartActivity";
 
-        // If any product is Deleted from the Cart, to retrieve the details of the deleted item.
-        adapter.setOnItemClickListener(new ProductAdapter.onItemClickListener() {
-            @Override
-            public void onDeleteClick(int position, int id, double our_price, double mrp, int qty, double retail_price, double tot_discount, boolean delete) {
-                Toast.makeText(CartActivity.this, "Item Deleted", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "Position : "+position+" Id : "+id+" Price : "+our_price);
-                removeItem(position, id, our_price, mrp, qty, retail_price, tot_discount, delete);
-//                RetrieveFromDatabase();
-            }
-
-            @Override
-            public void onIncreaseQuantity(int position, int id, double mrp, double our_price, double retail_price, double discount) {
-                increaseQuantity(position, id, mrp, our_price, retail_price, discount);
-            }
-
-            @Override
-            public void onDecreaseQuantity(int position, int id, double mrp, double our_price, double retail_price, double discount, boolean delete) {
-                decreaseQuantity(position, id, mrp, our_price, retail_price, discount, delete);
-            }
-        });
-
         // if User clicks on Scan_Product Button in UI.
         scan_product.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,6 +241,10 @@ public class CartActivity extends AppCompatActivity {
                     // If coming from Products Category Screen then, go back there.
                     if(coming_from.equals("ProductCategory")){
                         in  = new Intent(CartActivity.this, ProductsCategory.class);
+                    } else if (coming_from.equals("ProductsSearchResults")) {
+                        in  = new Intent(CartActivity.this, ProductsSearchResults.class);
+                        in.putExtra("coming_from", "Cart");
+                        in.putExtra("search_string", search_str);
                     } else {
                         in  = new Intent(CartActivity.this, ProductsList.class);
                         in.putExtra("coming_from", "Cart");
@@ -274,6 +263,31 @@ public class CartActivity extends AppCompatActivity {
         fetch_referral_amt();
         // -------------------------------- X X X X X X X X X X X ---------------------------------------
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        /* If any product is Deleted from the Cart, to retrieve the details of the deleted item. */
+        adapter.setOnItemClickListener(new ProductAdapter.onItemClickListener() {
+            @Override
+            public void onDeleteClick(int position, int id, double our_price, double mrp, int qty, double retail_price, double tot_discount, boolean delete) {
+                Toast.makeText(CartActivity.this, "Item Deleted", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Position : "+position+" Id : "+id+" Price : "+our_price);
+                removeItem(position, id, our_price, mrp, qty, retail_price, tot_discount, delete);
+            }
+
+            @Override
+            public void onIncreaseQuantity(int position, int id, double mrp, double our_price, double retail_price, double discount) {
+                increaseQuantity(position, id, mrp, our_price, retail_price, discount);
+            }
+
+            @Override
+            public void onDecreaseQuantity(int position, int id, double mrp, double our_price, double retail_price, double discount, boolean delete) {
+                decreaseQuantity(position, id, mrp, our_price, retail_price, discount, delete);
+            }
+        });
+        Log.d(TAG, "onStart is called");
     }
 
     private void increaseQuantity(int position, int id, double mrp, double our_price, double retail_price, double discount) {
@@ -619,13 +633,6 @@ public class CartActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        total_our_price = 0.0;
-        item_qty = 0;
-    }
-
-    @Override
     public void onBackPressed() {
         Intent in;
         Log.d(TAG, "Shopping Method : "+shoppingMethod);
@@ -637,6 +644,10 @@ public class CartActivity extends AppCompatActivity {
             // If coming from Products Category Screen then, go back there.
             if(coming_from.equals("ProductCategory")){
                 in  = new Intent(CartActivity.this, ProductsCategory.class);
+            } else if (coming_from.equals("ProductsSearchResults")) {
+                in  = new Intent(CartActivity.this, ProductsSearchResults.class);
+                in.putExtra("coming_from", "Cart");
+                in.putExtra("search_string", search_str);
             } else {
                 in  = new Intent(CartActivity.this, ProductsList.class);
                 in.putExtra("coming_from", "Cart");
@@ -657,8 +668,12 @@ public class CartActivity extends AppCompatActivity {
             in  = new Intent(CartActivity.this, BarcodeScannerActivity.class);
             in.putExtra("Type", "Product_Scan");
         } else if(shoppingMethod.equals("Takeaway") || shoppingMethod.equals("HomeDelivery")){
-            if(coming_from.equals("ProductCategory")){
+            if (coming_from.equals("ProductCategory")){
                 in  = new Intent(CartActivity.this, ProductsCategory.class);
+            } else if (coming_from.equals("ProductsSearchResults")) {
+                in  = new Intent(CartActivity.this, ProductsSearchResults.class);
+                in.putExtra("coming_from", "Cart");
+                in.putExtra("search_string", search_str);
             } else {
                 in  = new Intent(CartActivity.this, ProductsList.class);
                 in.putExtra("coming_from", "Cart");
@@ -680,21 +695,31 @@ public class CartActivity extends AppCompatActivity {
 
     public void Make_Payment(View view) {
 
-        Double a, b;
+        Double final_product_price, value_ref_bal;
         String f_amt  = tv_final_amt.getText().toString();
         f_amt = f_amt.replace("₹", "");
         // Value of Final_Amount
-        a = Double.valueOf(f_amt);
+        final_product_price = Double.valueOf(f_amt);
         // Value of Referral_Balance
-        b = Double.valueOf(ref_bal);
+        value_ref_bal = Double.valueOf(ref_bal);
 
-        String ref_bal_used = tv_total_product_price.getText().toString();
-        ref_bal_used = ref_bal_used.replace("₹", "");
-        // Calculating the Referral_balance to be Stored in SharedPreference.
-        final Double cal_ref_bal = b - Double.valueOf(ref_bal_used);
-        Log.d(TAG, "Updated Referral Amount : "+cal_ref_bal);
+        String p_price = tv_total_product_price.getText().toString();
+        p_price = p_price.replace("₹", "");
 
-        if (a > 0) {
+        final double product_price = Double.parseDouble(p_price);
+
+        double ref_bal_used, cal_ref_bal;
+
+        if ( product_price > value_ref_bal ) {
+            ref_bal_used = product_price - final_product_price;
+            cal_ref_bal = 0;
+        } else {
+            ref_bal_used = product_price;
+            cal_ref_bal = value_ref_bal - product_price;
+        }
+        Log.d(TAG, "Make_Payment -> ref_bal_used : "+ref_bal_used+", cal_ref_bal : "+cal_ref_bal);
+
+        if (final_product_price > 0) {
 
             Intent in;
 
@@ -706,7 +731,7 @@ public class CartActivity extends AppCompatActivity {
             } else {
 
                 in = new Intent(this, PaymentMethod.class);
-                in.putExtra("referral_bal_used", ref_bal_used);
+                in.putExtra("referral_bal_used", String.valueOf(ref_bal_used));
                 in.putExtra("referral_bal", String.valueOf(cal_ref_bal));
 
             }
@@ -723,7 +748,7 @@ public class CartActivity extends AppCompatActivity {
 
             startActivity(in);
 
-        } else if (a == 0) {
+        } else if (final_product_price == 0) {
 
             // else go to Payment_Successful Page.
 //
@@ -732,13 +757,13 @@ public class CartActivity extends AppCompatActivity {
             // Setting txnAmount's value to final_amt.
             txnAmount = f_amt;
             // Doing all the things to be done after Successful Payment(which is already done here :-)..)
-            afterPaymentConfirm(ref_bal_used, generateTxn_Order(), generateTxn_Order(), "[Referral_Used]");
+            afterPaymentConfirm(String.valueOf(ref_bal_used), generateTxn_Order(), generateTxn_Order(), "[Referral_Used]");
             // Redirect to Payment Successful Page.
             Log.d(TAG, "Sending the User to PaymentSuccess Activity");
             Log.d(TAG, "TxnReceipt Details : "+txnReceipt.toString());
             Intent in = new Intent(this, PaymentSuccess.class);
             in.putExtra("calc_referral_balance", String.valueOf(cal_ref_bal));
-            in.putExtra("referral_balance_used", ref_bal_used);
+            in.putExtra("referral_balance_used", String.valueOf(ref_bal_used));
             in.putExtras(txnReceipt);
             in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(in);

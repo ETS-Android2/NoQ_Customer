@@ -2,14 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/pill_bg"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:id="@+id/cpl_constraint_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/pill_bg">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/cpl_coordinator_layout"
+        android:id="@+id/cpsr_coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
@@ -29,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TableLayout
-            android:id="@+id/otp_table_layout"
+            android:id="@+id/otp_table_layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
@@ -42,7 +40,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cpl_btn_cart"
+                    android:id="@+id/asc_btn_cart"
                     style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -59,7 +57,7 @@
                     app:shapeAppearance="@style/LeftRound" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/apc_btn_categories"
+                    android:id="@+id/asc_btn_categories"
                     style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -81,7 +79,7 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/plc_linear_layout"
+        android:id="@+id/slc_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +96,7 @@
             android:src="@drawable/noq_logo_light" />
 
         <TextView
-            android:id="@+id/apl_store_name"
+            android:id="@+id/cpsr_store_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -111,62 +109,25 @@
             android:textSize="14sp"
             android:text="Desi Farms, Rohan Mithila"/>
 
-        <LinearLayout
-            android:id="@+id/cpl_category_linear_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/apl_category_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="start"
-                android:visibility="visible"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="#707070"
-                android:text="Milk"/>
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-            <ImageView
-                android:id="@+id/cpl_search_icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:padding="10dp"
-                android:src="@drawable/search_icon"/>
-
-        </LinearLayout>
-
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/cpl_search_view"
+            android:id="@+id/cpsr_search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
             android:layout_gravity="center"
             android:gravity="center"
-            app:queryHint="Search in Milk"
-            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
             android:textStyle="bold"
             android:textColor="#707070"
             android:textSize="14sp"
             app:iconifiedByDefault="false"
+            app:queryHint="Search in "
             android:text="Search"/>
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/apl_recycler_view"
+        android:id="@+id/cpsr_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
@@ -174,20 +135,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plc_linear_layout" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cpl_search_suggestions"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="70dp"
-        android:background="@drawable/blank_bg"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plc_linear_layout"/>
+        app:layout_constraintTop_toBottomOf="@+id/slc_linear_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,7 +46,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#FFF"
-            android:text="(200)"/>
+            android:text="(0)"/>
 
     </LinearLayout>
 
@@ -104,7 +104,7 @@
                         android:id="@+id/ca_total_product_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="₹736"
+                        android:text="₹0"
                         android:textColor="#707070"
                         android:textSize="16sp" />
 
@@ -133,7 +133,7 @@
                         android:id="@+id/ca_referral_amt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="₹300"
+                        android:text="₹0"
                         android:textColor="#707070"
                         android:textSize="14sp" />
 
@@ -188,7 +188,7 @@
                         android:id="@+id/ca_final_amt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="₹436"
+                        android:text="₹0"
                         android:textColor="#707070"
                         android:textSize="18sp"
                         android:textStyle="bold" />

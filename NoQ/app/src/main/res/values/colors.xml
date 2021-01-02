@@ -7,6 +7,8 @@
     <color name="secondaryDarkColor">#6a0080</color>
     <color name="colorAccent">#3e2723</color>
     <color name="secondaryTextColor">#393E46</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
 
     <color name="primaryColor">#212121</color>
     <color name="secondaryColor">#1B9EC5</color>
