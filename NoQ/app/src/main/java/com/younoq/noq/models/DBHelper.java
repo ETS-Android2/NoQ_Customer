@@ -24,7 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TABLE_PRODUCTS = "Products_Table";
     private static final String CREATE_TABLE_PRODUCTS = "CREATE TABLE " + TABLE_PRODUCTS + " (id INTEGER PRIMARY KEY AUTOINCREMENT, Store_ID TEXT, Barcode TEXT, Number_of_Items INTEGER," +
             " Product_Name TEXT, MRP TEXT, Total_Amount TEXT, Retailers_Price TEXT, Our_Price TEXT, Total_Discount TEXT, Has_Image TEXT, Quantity TEXT, ShoppingMethod TEXT, Category TEXT)";
-    // Product Table's Columns
+    /* Product Table's Columns */
     private static final String prod_col_1 = "Store_ID";
     private static final String prod_col_2 = "Barcode";
     private static final String prod_col_3 = "Number_of_Items";
@@ -49,16 +49,14 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_PRODUCTS);
-//        db.execSQL(CREATE_TABLE_NOQ_STORES);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.d(TAG, "DB Version Changed, Recreating the Products Table");
-        // Storing Logs in the Logger.
+        /* Storing Logs in the Logger. */
         logger.writeLog(TAG, "onUpgrade()","DB Version Changed, Recreating the Products Table\n");
         db.execSQL("DROP TABLE IF EXISTS "+ TABLE_PRODUCTS);
-//        db.execSQL("DROP TABLE IF EXISTS "+ TABLE_STORES);
         onCreate(db);
     }
 
@@ -92,7 +90,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         long res = db.insert(TABLE_PRODUCTS, null, contentValues);
         final String TAG = "DBHelper";
-//        Log.d(TAG, "result of the Insert Query : "+res);
         if(res == -1){
             return false;
         }else{
@@ -111,8 +108,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(prod_col_2, prod.get(1));
         contentValues.put(prod_col_3, qty);
         contentValues.put(prod_col_4, prod.get(2));
-        // Using Retailer's Price as currently there is no discount.
-        // TODO : Use Our Price instead of Retailer Price.
+        /* Using Our Price. */
         tot_amt = qty*Double.parseDouble(prod.get(5));
         contentValues.put(prod_col_5, prod.get(3));
         contentValues.put(prod_col_6, String.valueOf(tot_amt));
@@ -125,7 +121,6 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(prod_col_13, prod.get(8));
 
         long res = db.insert(TABLE_PRODUCTS, null, contentValues);
-//        Log.d(TAG, "result of the Insert Query : "+res);
         if(res == -1){
             return false;
         }else{
@@ -134,15 +129,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-//    public boolean insertDataInStoreTable(String data){
-//
-//        return true;
-//
-//    }
-
     public Cursor retrieveData(String sid, String shoppingMethod){
         SQLiteDatabase db = this.getWritableDatabase();
-//        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_PRODUCTS+" WHERE Store_ID="+sid+" AND ShoppingMethod =?", new String[]{shoppingMethod});
+        /* Cursor res = db.rawQuery("SELECT * FROM "+TABLE_PRODUCTS+" WHERE Store_ID="+sid+" AND ShoppingMethod =?", new String[]{shoppingMethod}); */
         Cursor res = db.rawQuery("SELECT * FROM "+TABLE_PRODUCTS+" WHERE Store_ID =? AND ShoppingMethod =?", new String[]{sid, shoppingMethod});
         return res;
     }
@@ -159,9 +148,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Boolean product_exists(String b_code, String sid, String sMethod){
         SQLiteDatabase db = this.getWritableDatabase();
-//        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_PRODUCTS+" WHERE Barcode="+b_code+" AND Store_ID="+sid+" AND ShoppingMethod = ?", new String[]{sMethod});
+        /* Cursor res = db.rawQuery("SELECT * FROM "+TABLE_PRODUCTS+" WHERE Barcode="+b_code+" AND Store_ID="+sid+" AND ShoppingMethod = ?", new String[]{sMethod}); */
         Cursor res = db.rawQuery("SELECT * FROM "+TABLE_PRODUCTS+" WHERE Barcode =? AND Store_ID =? AND ShoppingMethod =?", new String[]{b_code, sid, sMethod});
-//        Log.d(TAG, "Product_Exists : "+res.getCount());
+        /* Log.d(TAG, "Product_Exists : "+res.getCount()); */
         return res.getCount() > 0;
     }
 
@@ -196,7 +185,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getProductQuantity(String sid, String b_code, String sMethod) {
 
         SQLiteDatabase db = this.getWritableDatabase();
-//        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_PRODUCTS+" WHERE Store_ID = "+sid+" AND Barcode = "+b_code+" AND ShoppingMethod =?", new String[]{sMethod});
+        /* Cursor res = db.rawQuery("SELECT * FROM "+TABLE_PRODUCTS+" WHERE Store_ID = "+sid+" AND Barcode = "+b_code+" AND ShoppingMethod =?", new String[]{sMethod}); */
         Cursor res = db.rawQuery("SELECT * FROM "+TABLE_PRODUCTS+" WHERE Store_ID =? AND Barcode =? AND ShoppingMethod =?", new String[]{sid, b_code, sMethod});
         return res;
 

@@ -55,97 +55,7 @@ public class AwsBackgroundWorker extends AsyncTask<String, Void, String> {
 
         String type = params[0];
 
-        if (type.equals("Send_Invoice_Mail")){
-
-            Log.d(TAG, "Currently not in Use");
-//            db = new DBHelper(context);
-//            saveInfoLocally = new SaveInfoLocally(context);
-//            ArrayList<List> Invoice = new ArrayList<>();
-//
-//            final String phone = saveInfoLocally.getPhone();
-//            final String uname = saveInfoLocally.getUserName();
-//            final String store_name = saveInfoLocally.getStoreName();
-//            final String store_addr = saveInfoLocally.getStoreAddress();
-//            final String store_id = saveInfoLocally.get_store_id();
-//            final String time = params[1];
-//            final String final_amt = params[2];
-//            final String comment = params[3];
-//            final String r_no = params[4];
-//
-//            final String[] dt = time.split(" ");
-//            final String TAG = "AwsBackgroundWorker";
-//            Log.d(TAG, "Invoice Mail Date : "+dt[0]+ " and TIme: "+dt[1]);
-//
-//            List<String> details = new ArrayList<>();
-//            details.add(uname);
-//            details.add(store_name);
-//            details.add(r_no);
-//            details.add(store_addr);
-//            details.add(dt[0]);
-//            details.add(dt[1]);
-//            details.add(final_amt);
-//            details.add(comment);
-//            details.add(store_id);
-//
-//            JSONArray jsDetails = new JSONArray(details);
-//            Log.d(TAG, "Invoice Email Details : "+jsDetails.toString());
-//
-//            Cursor res = db.retrieveData();
-//            if(res.getCount() == 0){
-//                return "0";
-//            } else {
-//                while(res.moveToNext()){
-//                    List<String> Product = new ArrayList<>();
-//
-//                    Product.add(res.getString(4));
-//                    Product.add(res.getString(8));
-//                    Product.add(res.getString(3));
-//                    Product.add(res.getString(6));
-//
-//                    Invoice.add(Product);
-//                }
-//            }
-//
-//            JSONArray jsArray = new JSONArray(Invoice);
-//            Log.d(TAG, "Invoice Email Products : "+jsArray.toString());
-//
-//            String insert_data_url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/aws/email_send.php";
-//
-//            try {
-//
-//                String line = "";
-//
-//                URL url = new URL(insert_data_url);
-//                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-//                httpURLConnection.setRequestMethod("POST");
-//                httpURLConnection.setDoOutput(true);
-//                httpURLConnection.setDoInput(true);
-//                OutputStream outputStream = httpURLConnection.getOutputStream();
-//                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
-//                String post_data = URLEncoder.encode("phone", "UTF-8") + "=" + URLEncoder.encode(phone, "UTF-8")+"&"+
-//                        URLEncoder.encode("msg_details", "UTF-8") + "=" + URLEncoder.encode(jsDetails.toString(), "UTF-8")+"&"+
-//                        URLEncoder.encode("prod_data", "UTF-8") + "=" + URLEncoder.encode(jsArray.toString(), "UTF-8");
-//                bufferedWriter.write(post_data);
-//                bufferedWriter.flush();
-//                bufferedWriter.close();
-//                outputStream.close();
-//                InputStream inputStream = httpURLConnection.getInputStream();
-//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
-//                while ((line = bufferedReader.readLine()) != null) {
-//                    result.append(line + "\n");
-//                }
-//                bufferedReader.close();
-//                httpURLConnection.disconnect();
-//
-//                return result.toString();
-//
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-        } else if (type.equals("greet_user")){
+        if (type.equals("greet_user")){
 
             String insert_data_url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/Amazon/greet_user.php";
             Log.d("AwsBackgroundActivity", "Greet User in AwsBackgroundActivity");
@@ -393,7 +303,7 @@ public class AwsBackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
                 String post_data = URLEncoder.encode("store_id", "UTF-8") + "=" + URLEncoder.encode(store_id, "UTF-8")+"&"+
-                                URLEncoder.encode("category_name", "UTF-8") + "=" + URLEncoder.encode(category_name, "UTF-8");
+                        URLEncoder.encode("category_name", "UTF-8") + "=" + URLEncoder.encode(category_name, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -471,7 +381,7 @@ public class AwsBackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
                 String post_data = URLEncoder.encode("interested_in", "UTF-8") + "=" + URLEncoder.encode(interested_in, "UTF-8")+"&"+
-                                URLEncoder.encode("store_id", "UTF-8") + "=" + URLEncoder.encode(store_id, "UTF-8");
+                        URLEncoder.encode("store_id", "UTF-8") + "=" + URLEncoder.encode(store_id, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -492,74 +402,45 @@ public class AwsBackgroundWorker extends AsyncTask<String, Void, String> {
 
         } else if (type.equals("Send_Retailer_Invoice_Msg")){
 
-            db = new DBHelper(context);
             saveInfoLocally = new SaveInfoLocally(context);
-            ArrayList<List> Invoice = new ArrayList<>();
 
             final String retailer_phone = saveInfoLocally.getRetailer_Phone_No();
-            final String phone = saveInfoLocally.getPhone();
-            final String uname = saveInfoLocally.getUserName();
-            final String store_name = saveInfoLocally.getStoreName();
-            final String store_addr = saveInfoLocally.getStoreAddress();
-            final String curr_store_id = saveInfoLocally.get_store_id();
-            final String user_address = saveInfoLocally.getUserAddress();
             final String time = params[1];
             final String final_amt = params[2];
             final String r_no = params[3];
             final String tot_retail_price = params[4];
+            final String ref_bal_used = params[5];
+            final String to_our_price = params[6];
+            final String delivery_charge = params[7];
 
             final String[] dt = time.split(" ");
             final String TAG = "BackgroundWorker";
             Log.d(TAG, "Invoice Date : "+dt[0]+ " and Time: "+dt[1]);
 
-            // Retrieving the ShoppingMethod from the SharedPreferences.
+            /* Calculating the Total Amt, Amt. Paid and Amt. to Collect. */
+            final String tot_amt = String.valueOf(Double.parseDouble(tot_retail_price) + Double.parseDouble(delivery_charge));
+
+            final String amt_paid = String.valueOf(Double.parseDouble(tot_retail_price) - Double.parseDouble(to_our_price) + Double.parseDouble(ref_bal_used));
+
+            final String amt_to_collect = String.valueOf(Double.parseDouble(to_our_price) - Double.parseDouble(ref_bal_used) + Double.parseDouble(delivery_charge));
+
+            /* Retrieving the ShoppingMethod from the SharedPreferences. */
             final String shoppingMethod = saveInfoLocally.getShoppingMethod();
 
             List<String> details = new ArrayList<>();
-            details.add(store_name);
-            details.add(store_addr);
             details.add(shoppingMethod);
-            details.add(uname);
-            details.add(phone);
+            details.add(r_no);
             details.add(dt[0]);
             details.add(dt[1]);
-            details.add(r_no);
-            details.add(tot_retail_price);
+            details.add(tot_amt);
+            details.add(amt_paid);
+            details.add(amt_to_collect);
             details.add(final_amt);
-            details.add(user_address);
 
             JSONArray jsDetails = new JSONArray(details);
             Log.d(TAG, "Invoice SMS Details : "+jsDetails.toString());
 
-            Cursor res = db.retrieveData(curr_store_id, shoppingMethod);
-            if(res.getCount() == 0){
-                return "0";
-            } else {
-                while(res.moveToNext()){
-
-                    final String sid = res.getString(1);
-                    Log.d(TAG, "In Send_Invoice_Msg Current Store_ID : "+curr_store_id+" Product Store_ID : "+sid);
-                    // Check to ensure only those products are sent to Invoice Msg, which belong to the Current Store_ID.
-                    if(curr_store_id.equals(sid)) {
-
-                        List<String> Product = new ArrayList<>();
-
-                        Product.add(res.getString(2));
-                        Product.add(res.getString(4));
-                        Product.add(res.getString(7));
-                        Product.add(res.getString(3));
-                        Product.add(res.getString(6));
-
-                        Invoice.add(Product);
-
-                    }
-                }
-            }
-
-            JSONArray jsArray = new JSONArray(Invoice);
-            Log.d(TAG, "Invoice SMS Products : "+jsArray.toString());
-
-            String insert_data_url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/Amazon/send_retailer_invoice_sms.php";
+            String insert_data_url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/Amazon/sendRetailerInvoiceSms_v2.php";
 
             try {
 
@@ -573,8 +454,7 @@ public class AwsBackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
                 String post_data = URLEncoder.encode("phone", "UTF-8") + "=" + URLEncoder.encode(retailer_phone, "UTF-8")+"&"+
-                        URLEncoder.encode("msg_details", "UTF-8") + "=" + URLEncoder.encode(jsDetails.toString(), "UTF-8")+"&"+
-                        URLEncoder.encode("prod_data", "UTF-8") + "=" + URLEncoder.encode(jsArray.toString(), "UTF-8");
+                        URLEncoder.encode("msg_details", "UTF-8") + "=" + URLEncoder.encode(jsDetails.toString(), "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -646,12 +526,12 @@ public class AwsBackgroundWorker extends AsyncTask<String, Void, String> {
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
-//                OutputStream outputStream = httpURLConnection.getOutputStream();
-//                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
-//                bufferedWriter.write(post_data);
-//                bufferedWriter.flush();
-//                bufferedWriter.close();
-//                outputStream.close();
+                /* OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close(); */
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
                 while ((line = bufferedReader.readLine()) != null) {
@@ -687,7 +567,7 @@ public class AwsBackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
                 String post_data = URLEncoder.encode("phone", "UTF-8") + "=" + URLEncoder.encode(phone, "UTF-8")+"&"+
-                                URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8");
+                        URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -730,9 +610,6 @@ public class AwsBackgroundWorker extends AsyncTask<String, Void, String> {
             byte[] buffer;
             int maxBufferSize = 1024 * 1024;
             File selectedFile = new File(file_path);
-//
-//        String[] parts = selectedFilePath.split("/");
-//        final String fileName = parts[parts.length - 1];
 
             if (!selectedFile.isFile()) {
                 return null;
@@ -741,38 +618,38 @@ public class AwsBackgroundWorker extends AsyncTask<String, Void, String> {
                     FileInputStream fileInputStream = new FileInputStream(selectedFile);
                     URL url = new URL(insert_data_url);
                     connection = (HttpURLConnection) url.openConnection();
-                    connection.setDoInput(true);//Allow Inputs
-                    connection.setDoOutput(true);//Allow Outputs
-                    connection.setUseCaches(false);//Don't use a cached Copy
+                    connection.setDoInput(true);/* Allow Inputs */
+                    connection.setDoOutput(true);/* Allow Outputs */
+                    connection.setUseCaches(false);/* Don't use a cached Copy */
                     connection.setRequestMethod("POST");
                     connection.setRequestProperty("Connection", "Keep-Alive");
                     connection.setRequestProperty("ENCTYPE", "multipart/form-data");
                     connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
                     connection.setRequestProperty("uploaded_file", file_path);
 
-                    //creating new dataoutputstream
+                    /*creating new dataoutputstream */
                     dataOutputStream = new DataOutputStream(connection.getOutputStream());
 
-                    //writing bytes to data outputstream
+                    /*writing bytes to data outputstream */
                     dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
                     dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""
                             + file_path + "\"" + lineEnd);
 
                     dataOutputStream.writeBytes(lineEnd);
 
-                    //returns no. of bytes present in fileInputStream
+                    /*returns no. of bytes present in fileInputStream */
                     bytesAvailable = fileInputStream.available();
-                    //selecting the buffer size as minimum of available bytes or 1 MB
+                    /*selecting the buffer size as minimum of available bytes or 1 MB */
                     bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                    //setting the buffer as byte array of size of bufferSize
+                    /*setting the buffer as byte array of size of bufferSize */
                     buffer = new byte[bufferSize];
 
-                    //reads bytes from FileInputStream(from 0th index of buffer to buffersize)
+                    /*reads bytes from FileInputStream(from 0th index of buffer to buffersize) */
                     bytesRead = fileInputStream.read(buffer, 0, bufferSize);
 
-                    //loop repeats till bytesRead = -1, i.e., no bytes are left to read
+                    /*loop repeats till bytesRead = -1, i.e., no bytes are left to read */
                     while (bytesRead > 0) {
-                        //write the bytes read from inputstream
+                        /*write the bytes read from inputstream */
                         dataOutputStream.write(buffer, 0, bufferSize);
                         bytesAvailable = fileInputStream.available();
                         bufferSize = Math.min(bytesAvailable, maxBufferSize);
@@ -787,12 +664,12 @@ public class AwsBackgroundWorker extends AsyncTask<String, Void, String> {
 
                     Log.i(TAG, "Server Response is: " + serverResponseMessage + ": " + serverResponseCode);
 
-                    //response code of 200 indicates the server status OK
+                    /*response code of 200 indicates the server status OK */
                     if (serverResponseCode == 200) {
                         Log.d(TAG, "File Upload completed.\n\n You can see the uploaded file here: \n\n");
                     }
 
-                    //closing the input and output streams
+                    /*closing the input and output streams */
                     fileInputStream.close();
                     dataOutputStream.flush();
                     dataOutputStream.close();
@@ -889,7 +766,7 @@ public class AwsBackgroundWorker extends AsyncTask<String, Void, String> {
 
         } else if (type.equals("updateRefundInfo")){
 
-            String insert_data_url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/Amazon/updateRefundInfo.php";
+            String insert_data_url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/updateRefundInfo.php";
             Log.d("BackgroundActivity", "Send_SMS in BackgroundActivity");
 
             try {
@@ -917,6 +794,35 @@ public class AwsBackgroundWorker extends AsyncTask<String, Void, String> {
                 }
                 bufferedReader.close();
                 httpURLConnection.disconnect();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else if (type.equals("retrieveAppVersion")){
+
+            String insert_data_url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/retrieveAppVersion.php";
+
+            try {
+
+                String line = "";
+
+                URL url = new URL(insert_data_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
+                while ((line = bufferedReader.readLine()) != null) {
+                    result.append(line + "\n");
+                }
+                bufferedReader.close();
+                httpURLConnection.disconnect();
+
+                return result.toString().trim();
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();

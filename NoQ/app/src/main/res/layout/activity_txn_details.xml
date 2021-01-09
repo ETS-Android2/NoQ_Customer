@@ -276,7 +276,7 @@
                 android:text="@string/ps_takeaway_desc"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/atd_btn_cont"
+                android:id="@+id/atd_btn_refund_init"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

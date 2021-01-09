@@ -5,6 +5,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +18,14 @@ import android.widget.ImageView;
 import com.google.android.material.tabs.TabLayout;
 import com.younoq.noq.R;
 import com.younoq.noq.adapters.MyPageFragmentAdapter;
+import com.younoq.noq.models.AwsBackgroundWorker;
 import com.younoq.noq.models.SaveInfoLocally;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Harsh Chaurasia(Phantom Boy).
@@ -24,6 +33,7 @@ import com.younoq.noq.models.SaveInfoLocally;
 
 public class IntroActivity extends FragmentActivity {
 
+    final String TAG = "IntroActivity";
     ViewPager viewPager;
     TabLayout tabIndicator;
     ImageView next_btn;
@@ -38,13 +48,59 @@ public class IntroActivity extends FragmentActivity {
 
         saveInfoLocally = new SaveInfoLocally(this);
 
-        if(!saveInfoLocally.isFirstLogin() || saveInfoLocally.hasFinishedIntro()) {
+        /* Retrieving the app's version. */
+        try {
+
+            final String type = "retrieveAppVersion";
+            final String res = new AwsBackgroundWorker(this).execute(type).get();
+
+            JSONArray jsonArray = new JSONArray(res.trim());
+            JSONObject jobj = jsonArray.getJSONObject(1);
+
+            final String curr_app_version = jobj.getString("App_Version");
+            Log.d(TAG, "Current App Version : "+curr_app_version);
+
+            PackageInfo pInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
+            String version = pInfo.versionName;
+            saveInfoLocally.set_app_version(version);
+            Log.d(TAG, "App Version : "+version);
+
+            final double device_app_version = Double.parseDouble(version);
+            final double current_app_version = Double.parseDouble(curr_app_version);
+
+            if (device_app_version < current_app_version) {
+
+                finish();
+                Intent in = new Intent(IntroActivity.this, UpdateApp.class);
+                in.putExtra("app_version", version);
+                in.putExtra("new_version", curr_app_version);
+                in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(in);
+
+            } else {
+
+                if(!saveInfoLocally.isFirstLogin() || saveInfoLocally.hasFinishedIntro()) {
+
+                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(in);
+                    finish();
+
+                }
+
+            }
+
+
+        } catch (PackageManager.NameNotFoundException | ExecutionException | InterruptedException | JSONException e) {
+            e.printStackTrace();
+        }
+
+        /* if(!saveInfoLocally.isFirstLogin() || saveInfoLocally.hasFinishedIntro()) {
 
             Intent in = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(in);
             finish();
 
-        }
+        } */
 
         Log.d("IntroActivity", "not Found");
 
@@ -70,7 +126,7 @@ public class IntroActivity extends FragmentActivity {
                 }
 
                 if (pos == 2) {
-                    // After this we will be in the last Screen.
+                    /* After this we will be in the last Screen. */
                     prepareLastScreen();
                 }
 
@@ -104,7 +160,7 @@ public class IntroActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-                // Setting the Flag as True.
+                /* Setting the Flag as True. */
                 saveInfoLocally.setHasFinishedIntro();
 
                 Intent in = new Intent(getApplicationContext(), MainActivity.class);
@@ -135,12 +191,4 @@ public class IntroActivity extends FragmentActivity {
 
     }
 
-//    private void changeFirstLoginStatus() {
-//
-//        SharedPreferences pref = getApplicationContext().getSharedPreferences("LoginDetails",MODE_PRIVATE);
-//        SharedPreferences.Editor editor = pref.edit();
-//        editor.putBoolean("isIntroOpened",true);
-//        editor.apply();
-//
-//    }
 }

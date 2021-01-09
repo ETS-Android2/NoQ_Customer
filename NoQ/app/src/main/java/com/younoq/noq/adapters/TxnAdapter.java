@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Harsh Chaurasia(Phantom Boy).
@@ -60,34 +61,30 @@ public class TxnAdapter extends RecyclerView.Adapter<TxnAdapter.TxnViewHolder> {
         store_det.setSpan(new RelativeSizeSpan(1.4f), 0, store_name.length(), 0);
 
         holder.tv_paid_for.setText(store_det);
-//        System.out.println("Store Name : "+store_name);
 
-//        holder.tv_store_addr.setText(store_addr);
+        /* holder.tv_store_addr.setText(store_addr); */
 
         final String amt_paid = "₹" + txn.getFinal_amt();
         holder.tv_amt_paid.setText(amt_paid);
-//        System.out.println("Amount Paid : "+amt_paid);
 
         final String timestamp = txn.getTimestamp();
         try {
 
             Date date;
-            // Converting String Date to Date Object.
+            /* Converting String Date to Date Object. */
             date = holder.inputDateFormat.parse(timestamp);
 
             final String month_date = holder.outputDateFormat.format(date) + ", " +holder.outputTimeFormat.format(date);
             holder.tv_timestamp.setText(month_date);
-//            System.out.println("Month Date : "+month_date);
 
-//            final String time = holder.outputTimeFormat.format(date);
-//            holder.tv_time.setText(time);
-//            System.out.println("Time : "+time+"\n");
+            /* final String time = holder.outputTimeFormat.format(date);
+            holder.tv_time.setText(time); */
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        // Setting the Total No. of Items in the Txn.
+        /* Setting the Total No. of Items in the Txn. */
         holder.tv_no_of_items.setText(txn.getTotal_items());
 
 
@@ -125,14 +122,15 @@ public class TxnAdapter extends RecyclerView.Adapter<TxnAdapter.TxnViewHolder> {
                         TxnDetailList.add(txn.getStore_state());
                         TxnDetailList.add(txn.getOrder_type());
                         TxnDetailList.add(String.valueOf(txn.getDelivery_duration()));
-                        //Adding TxnDetail List to txnData Bundle.
+                        TxnDetailList.add(txn.getRefund_initiated());
+                        /*Adding TxnDetail List to txnData Bundle. */
                         txnData.putStringArrayList("txnDetail", TxnDetailList);
-                        // Adding JSONArray as String to txnData Bundle.
+                        /* Adding JSONArray as String to txnData Bundle. */
                         txnData.putString("txnProductArray", txn.getProducts().toString());
                     }
 
                     Intent in = new Intent(v.getContext(), TxnDetails.class);
-                    // Adding the txnData Bundle to Intent.
+                    /* Adding the txnData Bundle to Intent. */
                     in.putExtras(txnData);
                     v.getContext().startActivity(in);
 
@@ -143,11 +141,11 @@ public class TxnAdapter extends RecyclerView.Adapter<TxnAdapter.TxnViewHolder> {
             tv_amt_paid = itemView.findViewById(R.id.tc_amt_paid);
             tv_timestamp = itemView.findViewById(R.id.tc_timestamp);
             tv_no_of_items = itemView.findViewById(R.id.tc_no_of_items);
-//            tv_store_addr = itemView.findViewById(R.id.tc_store_addr);
+            /* tv_store_addr = itemView.findViewById(R.id.tc_store_addr); */
 
-            inputDateFormat = new SimpleDateFormat("yyyy-MM-d HH:mm:ss");
-            outputDateFormat = new SimpleDateFormat("MMM dd");
-            outputTimeFormat = new SimpleDateFormat("hh:mm a");
+            inputDateFormat = new SimpleDateFormat("yyyy-MM-d HH:mm:ss", Locale.ENGLISH);
+            outputDateFormat = new SimpleDateFormat("MMM dd", Locale.ENGLISH);
+            outputTimeFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
 
         }
 

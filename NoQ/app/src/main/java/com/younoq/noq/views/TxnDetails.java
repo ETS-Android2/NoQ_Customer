@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.younoq.noq.adapters.TxnDetailsAdapter;
 import com.younoq.noq.classes.Product;
 import com.younoq.noq.models.AwsBackgroundWorker;
 import com.younoq.noq.models.SaveInfoLocally;
+import com.younoq.noq.models.Utilities;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -45,6 +48,7 @@ public class TxnDetails extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CoordinatorLayout coordinatorLayout;
     private Bundle txnData;
+    private Button btn_refund_init;
     private ArrayList<String> txnDetails;
     private String productsString, delivery_dur, receipt_no, store_name;
     private SimpleDateFormat inputDateFormat, outputDateFormat, outputTimeFormat;
@@ -56,16 +60,20 @@ public class TxnDetails extends AppCompatActivity {
     private LinearLayout linearLayout_amt_paid;
     private SaveInfoLocally saveInfoLocally;
     private int delivery_duration;
+    private Utilities utilities;
+    private boolean refund_initiated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_txn_details);
 
-        inputDateFormat = new SimpleDateFormat("yyyy-MM-d HH:mm:ss");
-        outputDateFormat = new SimpleDateFormat("MMM dd");
-        outputTimeFormat = new SimpleDateFormat("hh:mm a");
+        inputDateFormat = new SimpleDateFormat("yyyy-MM-d HH:mm:ss", Locale.ENGLISH);
+        outputDateFormat = new SimpleDateFormat("MMM dd", Locale.ENGLISH);
+        outputTimeFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
 
+        btn_refund_init = findViewById(R.id.atd_btn_refund_init);
+        utilities = new Utilities(this);
         productList = new ArrayList<>();
 
         recyclerView = findViewById(R.id.td_recycler_view);
@@ -85,29 +93,29 @@ public class TxnDetails extends AppCompatActivity {
         coordinatorLayout = findViewById(R.id.td_coordinator_layout);
         linearLayout_amt_paid = findViewById(R.id.td_linear_layout_amt_paid);
 
-        // Retrieving the Txn Data from the Intent.
+        /* Retrieving the Txn Data from the Intent. */
         txnData = getIntent().getExtras();
-        // show Transaction Data.
+        /* show Transaction Data. */
         displayTxnData(txnData);
 
     }
 
     private void displayTxnData(Bundle txnData) {
 
-        // Extracting Txn Details List from the Bundle.
+        /* Extracting Txn Details List from the Bundle. */
         txnDetails = txnData.getStringArrayList("txnDetail");
-        // Extracting Products String from Bundle.
+        /* Extracting Products String from Bundle. */
         productsString = txnData.getString("txnProductArray");
 
-        // Setting Txn Details.
+        /* Setting Txn Details. */
         final String amt_paid = "₹" + txnDetails.get(1);
         tv_amt_paid.setText(amt_paid);
 
-        // Store Name
+        /* Store Name */
         store_name = txnDetails.get(5) +", "+ txnDetails.get(6);
         tv_store_name.setText(store_name);
 
-        // Order Type
+        /* Order Type */
         final String order_type = txnDetails.get(9);
 
         if(order_type.equals("InStore")){
@@ -115,7 +123,7 @@ public class TxnDetails extends AppCompatActivity {
             tv_order_type.setText(R.string.ps_in_store);
             tv_order_msg.setVisibility(View.GONE);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            // Converting 10dp and 20dp in pixels.
+            /* Converting 10dp and 20dp in pixels. */
             final float marginTop = 10f, marginBottom = 20f;
             Resources r = getResources();
             final float mTop = TypedValue.applyDimension(
@@ -140,7 +148,7 @@ public class TxnDetails extends AppCompatActivity {
 
         } else if(order_type.equals("HomeDelivery")){
 
-            // Retrieving the Delivery Duration.
+            /* Retrieving the Delivery Duration. */
             delivery_duration = Integer.parseInt(txnDetails.get(10));
             Log.d(TAG, "Delivery Duration : "+delivery_duration);
             String timeUnit = "";
@@ -170,18 +178,21 @@ public class TxnDetails extends AppCompatActivity {
 
         }
 
-        // You Saved
+        refund_initiated = txnDetails.get(11).toLowerCase().equals("true");
+        Log.d(TAG, "Refund_Initiated : "+refund_initiated);
+
+        /* You Saved */
         final String you_saved = "₹" + txnDetails.get(2);
         tv_you_saved.setText(you_saved);
 
-        // Receipt No.
+        /* Receipt No. */
         receipt_no = txnDetails.get(0);
         tv_receipt_no.setText(receipt_no);
 
         final String timestamp = txnDetails.get(3);
 
         try {
-            // Converting String Date to Date Object.
+            /* Converting String Date to Date Object. */
             date = inputDateFormat.parse(timestamp);
             Log.d(TAG, "Input Date Parse : "+date);
 
@@ -189,8 +200,8 @@ public class TxnDetails extends AppCompatActivity {
             tv_time.setText(time);
             Log.d(TAG, " "+time);
 
-//            final String month_date = outputDateFormat.format(date);
-//            tv_month_date.setText(month_date);
+            /* final String month_date = outputDateFormat.format(date);
+            tv_month_date.setText(month_date); */
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -201,7 +212,7 @@ public class TxnDetails extends AppCompatActivity {
             pay_method = "Bonus";
         tv_paid_via.setText(pay_method);
 
-        // Creating List of Products.
+        /* Creating List of Products. */
         try {
 
             jsonArray = new JSONArray(productsString);
@@ -242,24 +253,23 @@ public class TxnDetails extends AppCompatActivity {
 
     public void go_back(View view) {
 
-        super.onBackPressed();
+        final String phone = saveInfoLocally.getPhone();
+        Intent in = new Intent(this, LastFiveTxns.class);
+        in.putExtra("Phone", phone);
+        in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(in);
 
     }
 
-    public void showTopSnackBar(Context context, CoordinatorLayout coordinatorLayout, String msg, int color) {
+    @Override
+    public void onBackPressed() {
 
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, msg, Snackbar.LENGTH_LONG);
-        View snackBarView = snackbar.getView();
-        snackBarView.setBackgroundColor(ContextCompat.getColor(context, color));
-        final Snackbar.SnackbarLayout snackBarLayout = (Snackbar.SnackbarLayout) snackbar.getView();
-        for (int i = 0; i < snackBarLayout.getChildCount(); i++) {
-            View parent = snackBarLayout.getChildAt(i);
-            if (parent instanceof LinearLayout) {
-                ((LinearLayout) parent).setRotation(180);
-                break;
-            }
-        }
-        snackbar.show();
+        final String phone = saveInfoLocally.getPhone();
+
+        Intent in = new Intent(this, LastFiveTxns.class);
+        in.putExtra("Phone", phone);
+        in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(in);
 
     }
 
@@ -270,21 +280,34 @@ public class TxnDetails extends AppCompatActivity {
         final String name = saveInfoLocally.getUserName();
         final String sent_to = "+919158911702";
 
-        try {
+        if (!refund_initiated) {
 
-            final String msg = "Receipt No : " + receipt_no + ", Store : " + store_name + "\n" + name + ", Phone No : " + phone +
-                    ", has applied for the Refund & Return, kindly get in touch with them asap.";
+            try {
 
-            final String res = new AwsBackgroundWorker(this).execute(type, msg, sent_to).get();
+                final String msg = "Refund -> Receipt No: " + receipt_no + "\n" + "Phone No: " + phone;
 
-            showTopSnackBar(this, coordinatorLayout, "Your request has been received, we will get back to you soon!", R.color.BLUE);
+                Log.d(TAG, msg);
 
-            final String type1 = "updateRefundInfo";
+                /* final String res = new AwsBackgroundWorker(this).execute(type, msg, sent_to).get(); */
 
-            final String res1 = new AwsBackgroundWorker(this).execute(type1, receipt_no).get();
+                utilities.showTopSnackBar(this, coordinatorLayout, "Your request has been received, we will get back to you soon!", R.color.BLUE);
 
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
+                final String type1 = "updateRefundInfo";
+
+                final String res1 = new AwsBackgroundWorker(this).execute(type1, receipt_no).get();
+                Log.d(TAG, "Update Refund Status : "+res1);
+
+                /* Making the refund initiated true. */
+                refund_initiated = true;
+
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+
+            utilities.showTopSnackBar(this, coordinatorLayout, "Refund has been Initiated, Our representative will contact you shortly!", R.color.BLUE);
+
         }
 
     }

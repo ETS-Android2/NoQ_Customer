@@ -6,25 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".views.DeliveryDetails">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="5dp">
-
-        <com.github.ybq.android.spinkit.SpinKitView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/spin_kit"
-            style="@style/SpinKitView.WanderingCubes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone"
-            app:SpinKit_Color="@color/primaryDarkColor" />
-
-    </RelativeLayout>
-
     <LinearLayout
         android:id="@+id/linearLayout8"
         android:layout_width="match_parent"
@@ -39,7 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -58,10 +39,10 @@
             style="Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="10dp"
             android:layout_gravity="center_vertical"
             app:endIconDrawable="@drawable/icon_edit"
             app:endIconMode="custom"
@@ -97,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -127,8 +108,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -156,8 +137,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:background="#F2707070"/>
 
     </LinearLayout>
@@ -166,8 +147,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
 
@@ -240,6 +221,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:text="Discounted Amount"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="20"/>
+
+            <TextView
+                android:id="@+id/dd_discounted_amt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="₹1800"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
                 android:text="Delivery Charges"/>
 
             <Space
@@ -253,34 +260,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:text="+ ₹40"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:text="Final Amount"/>
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="20"/>
-
-            <TextView
-                android:id="@+id/dd_final_disp_amt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:text="₹1800"/>
 
         </LinearLayout>
 
@@ -315,17 +294,35 @@
                 android:textColor="#FFF"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:cornerRadius="10dp" />
+                app:cornerRadius="5dp" />
 
         </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="5dp">
+
+            <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/spin_kit"
+                style="@style/SpinKitView.WanderingCubes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                app:SpinKit_Color="@color/primaryDarkColor" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:background="@drawable/round_linear_layout"
         android:backgroundTint="#4DE0E0E0"
         android:orientation="vertical"
@@ -348,6 +345,7 @@
                     android:id="@+id/dd_final_amt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:text="₹1840"/>
@@ -363,7 +361,7 @@
                     android:textColor="#FFF"
                     android:backgroundTint="#00DCFF"
                     android:padding="15dp"
-                    app:cornerRadius="10dp"
+                    app:cornerRadius="5dp"
                     android:textSize="14sp"
                     android:textStyle="bold"/>
 

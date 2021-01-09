@@ -269,7 +269,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
                 String post_data = URLEncoder.encode("product_id", "UtF-8") + "=" + URLEncoder.encode(product_id, "UTF-8")+"&"+
-                                   URLEncoder.encode("store_id", "UTF-8") + "=" + URLEncoder.encode(store_id, "UTF-8");
+                        URLEncoder.encode("store_id", "UTF-8") + "=" + URLEncoder.encode(store_id, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -300,7 +300,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
             ArrayList<List> Products = new ArrayList<>();
 
-            // Retrieving the ShoppingMethod from the SharedPreferences.
+            /* Retrieving the ShoppingMethod from the SharedPreferences. */
             final String shoppingMethod = saveInfoLocally.getShoppingMethod();
 
             Cursor res = db.retrieveData(curr_sid,  shoppingMethod);
@@ -311,34 +311,34 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
                     final String s_id = res.getString(1);
                     Log.d(TAG, "In Store_Basket Current Store_ID : "+curr_sid+" Product Store_ID : "+s_id);
-                    // Check to ensure only those products are stored in Basket_Table, which belong to the Current Store_ID.
+                    /* Check to ensure only those products are stored in Basket_Table, which belong to the Current Store_ID. */
                     if (curr_sid.equals(s_id)) {
 
                         List<String> Product = new ArrayList<>();
 
-                        Product.add(user_phone_no);  // User
-                        Product.add(saveInfoLocally.getSessionID());  // Session_ID
-                        Product.add(s_id);  // Store_ID
-                        Product.add(res.getString(2));  // Barcode
-                        Product.add(res.getString(3));  // Number_of_items
-                        Product.add(res.getString(5));  // Mrp_per_item
+                        Product.add(user_phone_no);  /* User */
+                        Product.add(saveInfoLocally.getSessionID());  /* Session_ID */
+                        Product.add(s_id);  /* Store_ID */
+                        Product.add(res.getString(2));  /* Barcode */
+                        Product.add(res.getString(3));  /* Number_of_items */
+                        Product.add(res.getString(5));  /* Mrp_per_item */
 
                         double tot = Double.parseDouble(res.getString(3)) * Double.parseDouble(res.getString(5));
-                        Product.add(String.valueOf(tot));  // Total_Mrp
+                        Product.add(String.valueOf(tot));  /* Total_Mrp */
 
-                        Product.add(res.getString(7));  // Retailer_Price_per_item
+                        Product.add(res.getString(7));  /* Retailer_Price_per_item */
 
                         tot = Double.parseDouble(res.getString(3)) * Double.parseDouble(res.getString(7));
-                        Product.add(String.valueOf(tot));  // Total_Retailer_Price
+                        Product.add(String.valueOf(tot));  /* Total_Retailer_Price */
 
-                        Product.add(res.getString(8));  // Our_Price_per_item
-                        Product.add(res.getString(9));  // Discount_per_item
+                        Product.add(res.getString(8));  /* Our_Price_per_item */
+                        Product.add(res.getString(9));  /* Discount_per_item */
 
                         tot = Double.parseDouble(res.getString(3)) * Double.parseDouble(res.getString(8));
-                        Product.add(String.valueOf(tot));  // Total_Our_Price
+                        Product.add(String.valueOf(tot));  /* Total_Our_Price */
 
                         tot = Double.parseDouble(res.getString(3)) * Double.parseDouble(res.getString(9));
-                        Product.add(String.valueOf(tot));  // Total_Discount
+                        Product.add(String.valueOf(tot));  /* Total_Discount */
 
                         Product.add(res.getString(13));
 
@@ -505,7 +505,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
             Log.d(TAG, "Invoice Details : "+jsArray.toString());
 
             final Logger logger = new Logger(context);
-            // Storing the Logs in the Logger.
+            /* Storing the Logs in the Logger. */
             logger.writeLog(TAG, "Store_Invoice()","Invoice Receipt : " + details.toString() +  "\n");
 
 
@@ -545,90 +545,47 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
         }  else if (type.equals("Send_Invoice_Msg")){
 
-            db = new DBHelper(context);
             saveInfoLocally = new SaveInfoLocally(context);
-            ArrayList<List> Invoice = new ArrayList<>();
 
-            // Retrieving the ShoppingMethod from the SharedPreferences.
+            /* Retrieving the ShoppingMethod from the SharedPreferences. */
             final String shoppingMethod = saveInfoLocally.getShoppingMethod();
 
-            String final_amt;
-
             final String phone = saveInfoLocally.getPhone();
-            final String uname = saveInfoLocally.getUserName();
-            final String store_name = saveInfoLocally.getStoreName();
-            final String store_addr = saveInfoLocally.getStoreAddress();
             final String curr_store_id = saveInfoLocally.get_store_id();
-            final String user_address = saveInfoLocally.getUserAddress();
             final String time = params[1];
-            // If shopping method equals to any of the Partner Delivery Shopping Method, then final_amt
-            // should be total_retail_price.
-            if (shoppingMethod.equals("Zomato") || shoppingMethod.equals("Swiggy")
-                    || shoppingMethod.equals("Dunzo") || shoppingMethod.equals("Other"))
-                final_amt = params[5];
-            else
-                final_amt = params[2];
-            final String comment = params[3];
-            final String r_no = params[4];
-            final String tot_retail_price = params[5];
-            final String ref_bal_used = params[6];
-            final String tot_discount = params[7];
-            final String to_our_price = params[8];
+            final String final_amt = params[2];
+            final String r_no = params[3];
+            final String tot_retail_price = params[4];
+            final String ref_bal_used = params[5];
+            final String to_our_price = params[6];
+            final String delivery_charge = params[7];
 
             final String[] dt = time.split(" ");
             final String TAG = "BackgroundWorker";
             Log.d(TAG, "Invoice Date : "+dt[0]+ " and Time: "+dt[1]);
 
+            /* Calculating the Total Amt, Amt. Paid and Amt. to Pay. */
+            final String tot_amt = String.valueOf(Double.parseDouble(tot_retail_price) + Double.parseDouble(delivery_charge));
+
+            final String amt_paid = String.valueOf(Double.parseDouble(tot_retail_price) - Double.parseDouble(to_our_price) + Double.parseDouble(ref_bal_used));
+
+            final String amt_to_pay = String.valueOf(Double.parseDouble(to_our_price) - Double.parseDouble(ref_bal_used) + Double.parseDouble(delivery_charge));
+
             List<String> details = new ArrayList<>();
-            details.add(uname);
-            details.add(store_name);
+            details.add(curr_store_id);
+            details.add(shoppingMethod);
             details.add(r_no);
-            details.add(store_addr);
             details.add(dt[0]);
             details.add(dt[1]);
+            details.add(tot_amt);
+            details.add(amt_paid);
+            details.add(amt_to_pay);
             details.add(final_amt);
-            details.add(comment);
-            details.add(curr_store_id);
-            details.add(tot_retail_price);
-            details.add(ref_bal_used);
-            details.add(tot_discount);
-            details.add(to_our_price);
-            details.add(shoppingMethod);
-            if(shoppingMethod.equals("HomeDelivery"))
-                details.add(user_address);
 
             JSONArray jsDetails = new JSONArray(details);
             Log.d(TAG, "Invoice SMS Details : "+jsDetails.toString());
 
-            Cursor res = db.retrieveData(curr_store_id, shoppingMethod);
-            if(res.getCount() == 0){
-                return "0";
-            } else {
-                while(res.moveToNext()){
-
-                    final String sid = res.getString(1);
-                    Log.d(TAG, "In Send_Invoice_Msg Current Store_ID : "+curr_store_id+" Product Store_ID : "+sid);
-                    // Check to ensure only those products are sent to Invoice Msg, which belong to the Current Store_ID.
-                    if(curr_store_id.equals(sid)) {
-
-                        List<String> Product = new ArrayList<>();
-
-                        Product.add(res.getString(4));
-                        Product.add(res.getString(8));
-                        Product.add(res.getString(3));
-                        Product.add(res.getString(6));
-                        Product.add(res.getString(7));
-
-                        Invoice.add(Product);
-
-                    }
-                }
-            }
-
-            JSONArray jsArray = new JSONArray(Invoice);
-            Log.d(TAG, "Invoice SMS Products : "+jsArray.toString());
-
-            String insert_data_url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/Amazon/send_invoice_msg.php";
+            String insert_data_url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/Amazon/sendInvoiceSms_v2.php";
 
             try {
 
@@ -642,8 +599,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
                 String post_data = URLEncoder.encode("phone", "UTF-8") + "=" + URLEncoder.encode(phone, "UTF-8")+"&"+
-                                   URLEncoder.encode("msg_details", "UTF-8") + "=" + URLEncoder.encode(jsDetails.toString(), "UTF-8")+"&"+
-                                   URLEncoder.encode("prod_data", "UTF-8") + "=" + URLEncoder.encode(jsArray.toString(), "UTF-8");
+                        URLEncoder.encode("msg_details", "UTF-8") + "=" + URLEncoder.encode(jsDetails.toString(), "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -681,7 +637,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
                 String post_data = URLEncoder.encode("phone", "UTF-8")+"="+URLEncoder.encode(phone, "UTF-8")+"&"+
-                                    URLEncoder.encode("flag", "UTF-8")+"="+URLEncoder.encode(flag, "UTF-8");
+                        URLEncoder.encode("flag", "UTF-8")+"="+URLEncoder.encode(flag, "UTF-8");
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -709,7 +665,6 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
             try {
 
                 final String phone = params[1];
-//                String phone = "+919130906493";
 
                 String line = "";
 

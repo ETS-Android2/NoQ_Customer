@@ -537,4 +537,20 @@ public class SaveInfoLocally {
 
     }
 
+    public void set_app_version(String version){
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("LoginDetails", Context.MODE_PRIVATE);
+        Editor editor = sharedPreferences.edit();
+        editor.putString("app_version", version).apply();
+
+    }
+
+    public String get_app_version(){
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("LoginDetails", Context.MODE_PRIVATE);
+        String sid = sharedPreferences.getString("app_version", "");
+        return sid;
+
+    }
+
 }

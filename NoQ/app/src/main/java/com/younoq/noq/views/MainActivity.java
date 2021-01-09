@@ -163,11 +163,11 @@ public class MainActivity extends AppCompatActivity{
 
                     Log.d(TAG, "Phone in MainActivity : "+phone);
 
-                final String otp = generatePIN();
-//                    final String otp = "0070";
-                final String type = "send_msg";
-                final String msg = otp + " is your NoQ Verification Code.Don't Share it with other people.The code is valid for only 5 minutes.";
-                new BackgroundWorker(this).execute(type, msg, phone);
+//                final String otp = generatePIN();
+                    final String otp = "0070";
+//                final String type = "send_msg";
+//                final String msg = otp + " is your NoQ Verification Code.Don't Share it with other people.The code is valid for only 5 minutes.";
+//                new BackgroundWorker(this).execute(type, msg, phone);
 
                     // Storing the Logs in the Logger.
                     logger.writeLog(TAG, "onContinue()","BackgroundWorker 'send_msg' Called, OTP Sent to the User\n");

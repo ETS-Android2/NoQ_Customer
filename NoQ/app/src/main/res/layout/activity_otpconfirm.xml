@@ -48,32 +48,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ma_im" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="126dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:text="@string/oc_enter_otp"
-        android:textColor="#707070"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
     <LinearLayout
-        android:id="@+id/otp_linear_layout"
+        android:id="@+id/otp_linear_layout_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/ma_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" >
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/oc_enter_otp"
+            android:textColor="#707070"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/otp_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,138 +92,134 @@
                 android:layout_height="wrap_content"
                 android:onClick="goToLanding"
                 android:textColor="@color/primaryDarkColor"
-                android:textStyle="bold"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ma_input"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/oc_otp"
-        android:gravity="center"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:boxStrokeColor="@color/primaryDarkColor"
-        app:errorEnabled="true"
-        app:hintTextColor="#000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/otp_linear_layout"
-        app:startIconDrawable="@drawable/icon_comment"
-        app:startIconTint="@color/primaryDarkColor">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/otp_enter"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ma_input"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="17"
-            android:inputType="number"
-            android:lines="1"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="#000"
-            android:textSize="16sp" />
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:hint="@string/oc_otp"
+            app:boxCornerRadiusBottomEnd="5dp"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            app:boxStrokeColor="@color/primaryDarkColor"
+            app:errorEnabled="true"
+            app:hintTextColor="#000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/otp_linear_layout"
+            app:startIconDrawable="@drawable/icon_comment"
+            app:startIconTint="@color/primaryDarkColor">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/otp_enter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="17"
+                android:inputType="number"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textSize="16sp" />
 
-    <TableLayout
-        android:id="@+id/otp_table_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:stretchColumns="*"
-        app:layout_constraintTop_toBottomOf="@+id/ma_input">
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TableLayout
+            android:id="@+id/otp_table_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:stretchColumns="*"
+            app:layout_constraintTop_toBottomOf="@+id/ma_input">
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_resend_otp"
-                        android:onClick="OnResend"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                        android:layout_marginEnd="10dp"
-                        android:text="@string/resend_otp"
-                        android:textAllCaps="false"
-                        android:textColor="#FFF"
-                        android:textAppearance="?attr/textAppearanceButton"
-                        android:backgroundTint="@color/primaryDarkColor"
-                        app:iconTint="#FFF"
-                        app:iconPadding="10dp"
-                        app:iconSize="15dp"
-                        app:iconGravity="textEnd"
-                        app:icon="@drawable/icon_resend"
-                        android:paddingTop="15dp"
-                        android:paddingBottom="15dp"
-                        app:cornerRadius="10dp"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_resend_otp"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/primaryDarkColor"
+                    android:onClick="OnResend"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:text="@string/resend_otp"
+                    android:textAllCaps="false"
+                    android:textAppearance="?attr/textAppearanceButton"
+                    android:textColor="#FFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="5dp"
+                    app:icon="@drawable/icon_resend"
+                    app:iconGravity="textEnd"
+                    app:iconPadding="10dp"
+                    app:iconSize="15dp"
+                    app:iconTint="#FFF" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_continue"
-                    android:onClick="OnContinue"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                     android:layout_marginStart="10dp"
-                    android:text="@string/cont"
-                    android:textAppearance="?attr/textAppearanceButton"
-                    android:textAllCaps="false"
-                    android:textColor="#FFF"
                     android:backgroundTint="@color/primaryDarkColor"
-                    app:iconTint="#FFF"
-                    app:iconPadding="10dp"
-                    app:iconSize="15dp"
-                    app:iconGravity="textEnd"
-                    app:icon="@drawable/icon_continue"
+                    android:onClick="OnContinue"
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
-                    app:cornerRadius="10dp"
+                    android:text="@string/cont"
+                    android:textAllCaps="false"
+                    android:textAppearance="?attr/textAppearanceButton"
+                    android:textColor="#FFF"
                     android:textSize="14sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    app:cornerRadius="5dp"
+                    app:icon="@drawable/icon_continue"
+                    app:iconGravity="textEnd"
+                    app:iconPadding="10dp"
+                    app:iconSize="15dp"
+                    app:iconTint="#FFF" />
 
-                </TableRow>
+            </TableRow>
 
-    </TableLayout>
+        </TableLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/otp_table_layout">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#707070"
-            android:textSize="14sp"
-            android:text="@string/otp_reenter_mob_no_desc"/>
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/otp_table_layout">
 
-        <TextView
-            android:id="@+id/otp_change_mob_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="goToLanding"
-            android:layout_marginStart="3dp"
-            android:textColor="@color/primaryDarkColor"
-            android:textSize="16sp"
-            android:text="@string/otp_reenter_mob_no"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/otp_reenter_mob_no_desc"
+                android:textColor="#707070"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/otp_change_mob_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:onClick="goToLanding"
+                android:text="@string/otp_reenter_mob_no"
+                android:textColor="@color/primaryDarkColor"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

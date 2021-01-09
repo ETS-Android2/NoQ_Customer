@@ -51,79 +51,75 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ma_im" />
 
-    <TextView
-        android:id="@+id/textView1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:text="@string/ma_enter_phone"
-        android:textColor="#707070"
-        android:textSize="22sp"
-        android:textStyle="bold"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/ma_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ma_input"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/mob_no"
-        android:gravity="center"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:boxStrokeColor="#00DCFF"
-        app:errorEnabled="true"
-        app:hintTextColor="#000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1"
-        app:startIconDrawable="@drawable/phone_25"
-        app:startIconTint="#00DCFF">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_phone"
+        <TextView
+            android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="17"
-            android:inputType="number"
-            android:lines="1"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="#000"
-            android:textSize="16sp" />
+            android:text="@string/ma_enter_phone"
+            android:textColor="#707070"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ma_input"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:hint="@string/mob_no"
+            app:boxCornerRadiusBottomEnd="5dp"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            app:boxStrokeColor="#00DCFF"
+            app:errorEnabled="true"
+            app:hintTextColor="#000"
+            app:startIconDrawable="@drawable/phone_25"
+            app:startIconTint="#00DCFF">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_cont"
-        android:onClick="onContinue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:text="@string/cont"
-        android:textAllCaps="false"
-        android:textColor="#FFF"
-        android:backgroundTint="#00DCFF"
-        android:padding="15dp"
-        app:cornerRadius="10dp"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ma_input"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="17"
+                android:inputType="number"
+                android:lines="1"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cont"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#00DCFF"
+            android:onClick="onContinue"
+            android:padding="15dp"
+            android:text="@string/cont"
+            android:textAllCaps="false"
+            android:textColor="#FFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:cornerRadius="5dp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/ma_footer"

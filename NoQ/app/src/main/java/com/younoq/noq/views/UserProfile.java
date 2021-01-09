@@ -1,6 +1,8 @@
 package com.younoq.noq.views;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -28,7 +30,8 @@ import java.util.concurrent.ExecutionException;
 
 public class UserProfile extends AppCompatActivity {
 
-    TextView tv_im_name, tv_name, tv_email, tv_referral_amt, tv_total_savings, tv_phone_no;
+    TextView tv_im_name, tv_name, tv_email, tv_referral_amt, tv_total_savings, tv_phone_no,
+            tv_app_version;
     SaveInfoLocally saveInfoLocally;
     private JSONObject jobj1, jobj2;
     private JSONArray jsonArray;
@@ -42,8 +45,9 @@ public class UserProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
 
         tv_im_name = findViewById(R.id.ns_tv_name);
+        tv_app_version = findViewById(R.id.ns_app_version);
         tv_name = findViewById(R.id.ns_username);
-//        tv_total_savings = findViewById(R.id.ns_total_savings);
+        /* tv_total_savings = findViewById(R.id.ns_total_savings); */
         tv_referral_amt = findViewById(R.id.ns_referral_amt);
         tv_phone_no = findViewById(R.id.ns_phone_no);
         tv_email = findViewById(R.id.ns_email);
@@ -51,7 +55,7 @@ public class UserProfile extends AppCompatActivity {
         saveInfoLocally = new SaveInfoLocally(this);
 
         fetch_referral_amt();
-        // Fetching the User Details
+        /* Fetching the User Details */
         fetch_User_Details();
 
     }
@@ -70,17 +74,25 @@ public class UserProfile extends AppCompatActivity {
         final String[] name_credentials = uname.split(" ", 2);
         String na;
         if (name_credentials.length >= 2) {
-//                        Log.d(TAG, "name Length Greater than Two");
             final String f = name_credentials[0];
             final String l = name_credentials[1];
             na = String.valueOf(f.charAt(0)) + l.charAt(0);
         } else {
-//                        Log.d(TAG, "name Length Smaller than Two");
             final String f = name_credentials[0];
             na = String.valueOf(f.charAt(0));
         }
 
         tv_im_name.setText(na);
+
+        try {
+
+            PackageInfo pInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
+            String version = "v"+ pInfo.versionName;
+            tv_app_version.setText(version);
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -100,7 +112,7 @@ public class UserProfile extends AppCompatActivity {
                     jobj2 = jsonArray.getJSONObject(1);
                     ref_bal = jobj2.getString("referral_balance");
                     Log.d(TAG, "Referral Amount Balance : "+ref_bal);
-                    // Saving the Referral_Amount_Balance to SharedPreferences to be used in CartActivity/
+                    /* Saving the Referral_Amount_Balance to SharedPreferences to be used in CartActivity */
                     saveInfoLocally.setReferralBalance(ref_bal);
                 }
 

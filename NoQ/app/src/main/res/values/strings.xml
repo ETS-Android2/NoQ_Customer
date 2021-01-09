@@ -163,8 +163,8 @@
     <string name="title_activity_test_policy">TestPolicy</string>
 
     <!-- Payment Successful Activity -->
-    <string name="ps_succ">Payment Successful</string>
-    <string name="pf_fail">Payment Failed</string>
+    <string name="ps_succ">Order Successful</string>
+    <string name="pf_fail">Order Failed</string>
     <string name="ps_pay_method">Payment Method</string>
     <string name="ps_order_type">Order Type</string>
     <string name="ps_thanks">Thank you for shopping with us!</string>
@@ -326,5 +326,9 @@
     <!-- ReturnAndRefund Activity -->
     <string name="rar_header">Refund &amp; Return</string>
     <string name="rar_btn">Contact Us</string>
+
+    <!-- UpdateAppActivity -->
+    <string name="ua_update">Update Now</string>
+    <string name="ua_desc">A new version is available on playstore for this app, kindly update the app in order to benefit from those features, and continue using the app.</string>
 
 </resources>
