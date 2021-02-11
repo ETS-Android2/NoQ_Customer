@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.younoq.noq.R;
 import com.younoq.noq.models.DBHelper;
 import com.younoq.noq.models.SaveInfoLocally;
+import com.younoq.noq.networkhandler.NetworkApi;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -74,13 +75,12 @@ public class ProductDetails extends AppCompatActivity {
         tv_prod_mrp_text = findViewById(R.id.pd_prod_mrp_text);
         tv_total_items_in_cart = findViewById(R.id.pd_total_items_in_cart);
         prod_discount_linearlayout = findViewById(R.id.pd_prod_disc_linear_layout);
-//        cancel = findViewById(R.id.pd_cancel);
         prodDetails = new ArrayList<>();
 
         mydb = new DBHelper(this);
         saveInfoLocally = new SaveInfoLocally(this);
 
-        // Fetching Details from the Intent.
+        /* Fetching Details from the Intent. */
         Intent in = getIntent();
         comingFrom = in.getStringExtra("comingFrom");
         shoppingMethod = in.getStringExtra("shoppingMethod");
@@ -88,7 +88,7 @@ public class ProductDetails extends AppCompatActivity {
         if(comingFrom.equals("BarcodeScan")){
             res = in.getStringExtra("result");
         } else if(comingFrom.equals("ProductList")){
-            // Extracting Product Details List from the Bundle.
+            /* Extracting Product Details List from the Bundle. */
             prodData = in.getExtras();
         }
 
@@ -181,11 +181,11 @@ public class ProductDetails extends AppCompatActivity {
                 tv_prod_name.setText(product_name);
                 String temp;
                 tv_prod_price.setText(jobj.getString("Our_Price"));
-                // Retrieving the Product's Discount
+                /* Retrieving the Product's Discount */
                 temp = jobj.getString("Total_Discount");
                 if(Double.parseDouble(temp) > 0){
                     temp = "Save ₹" + temp;
-//                    Log.d(TAG, jobj.getString("Product_Name")+", Retailer Discount : "+temp);
+
                     tv_prod_discount.setText(temp);
 
                     tv_prod_mrp.setText(jobj.getString("MRP"));
@@ -197,10 +197,10 @@ public class ProductDetails extends AppCompatActivity {
                 available_quantity = Integer.parseInt(jobj.getString("quantity"));
 
                 img_name = b_code;
-//            temp = "₹"+jobj.getString("Our_Price");
-//            tv5.setText(temp);
-//            temp = "₹"+jobj.getString("Total_Discount");
-//            tv6.setText(temp);
+                /* temp = "₹"+jobj.getString("Our_Price");
+                tv5.setText(temp);
+                temp = "₹"+jobj.getString("Total_Discount");
+                tv6.setText(temp); */
                 temp = jobj.getString("has_image");
                 hasImage = temp.toLowerCase().equals("true");
 
@@ -210,28 +210,28 @@ public class ProductDetails extends AppCompatActivity {
 
         } else if(comingFrom.equals("ProductList")){
 
-            // Extracting Products String from Bundle.
+            /* Extracting Products String from Bundle. */
             prodDetails = prodData.getStringArrayList("productDetails");
             Log.d(TAG, "Product Details : "+prodDetails);
 
-            // Marking Sure that there is some content in the prodDetails ArrayList.
+            /* Marking Sure that there is some content in the prodDetails ArrayList. */
             if(prodDetails.size() > 0) {
 
-                // Retrieving the Product Quantity from the Local Database.
+                /* Retrieving the Product Quantity from the Local Database. */
                 available_quantity = Integer.parseInt(prodDetails.get(9));
 
-                // Setting the Barcode's value.
+                /* Setting the Barcode's value. */
                 b_code = prodDetails.get(1);
                 tv_bcode.setText(prodDetails.get(1));
                 product_name = prodDetails.get(2);
                 tv_prod_name.setText(product_name);
                 String temp;
                 tv_prod_price.setText(prodDetails.get(5));
-                // Retrieving the Product's Discount ie., Total_Discount
+                /* Retrieving the Product's Discount ie., Total_Discount */
                 temp = prodDetails.get(6);
                 if(Double.parseDouble(temp) > 0){
                     temp = "Save ₹" + temp;
-//                    Log.d(TAG, prodDetails.get(2)+", Retailer Discount : "+temp);
+
                     tv_prod_discount.setText(temp);
 
                     tv_prod_mrp.setText(prodDetails.get(3));
@@ -241,7 +241,7 @@ public class ProductDetails extends AppCompatActivity {
                 }
 
                 img_name = prodDetails.get(1);
-                // Converting String to Boolean.
+                /* Converting String to Boolean. */
                 final String tmp = prodDetails.get(7).toLowerCase();
                 hasImage = tmp.equals("true");
                 category_name = prodDetails.get(8);
@@ -272,20 +272,18 @@ public class ProductDetails extends AppCompatActivity {
 
         img_name += ".png";
 
-//        Log.d(TAG, "Has Image : "+hasImage);
-//
-//        // If Product has Image, only Then show the Image.
+        /* If Product has Image, only Then show the Image. */
         if (hasImage) {
 
             String url;
             if(sid.equals("3")){
-                url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/school_images/"+img_name;
+                url = NetworkApi.API_URL +  "/DB/school_images/" + img_name;
                 Glide.with(this)
                         .load(url)
                         .placeholder(R.drawable.ic_launcher_foreground)
                         .into(im);
             } else {
-                url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/images/" + img_name;
+                url =  NetworkApi.API_URL +  "/DB/images/" + img_name;
                 Glide.with(this)
                         .load(url)
                         .centerCrop()
@@ -294,9 +292,6 @@ public class ProductDetails extends AppCompatActivity {
             }
 
         }
-
-//        String url = "https://picsum.photos/300";
-//        Log.d(TAG, "Product Details : "+res);
 
     }
 
@@ -335,7 +330,7 @@ public class ProductDetails extends AppCompatActivity {
 
             if(!b_code.equals(" ")){
                 product_exists = mydb.product_exists(b_code, sid, shoppingMethod);
-//            Log.d(TAG, "Product Exists : "+product_exists);
+
             } else {
                 Toast.makeText(this, "Some Error Occurred! Try Again.", Toast.LENGTH_SHORT).show();
             }
@@ -345,7 +340,7 @@ public class ProductDetails extends AppCompatActivity {
                 Log.d(TAG, "isUpdated : "+isUpdated);
                 if(isUpdated){
                     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-                    // Resetting the Value of Product_Quantity as the Product has been added to basket.
+                    /* Resetting the Value of Product_Quantity as the Product has been added to basket. */
                     p_qty = 1;
                     tv_prod_qty.setText(String.valueOf(p_qty));
                 } else {
@@ -369,7 +364,7 @@ public class ProductDetails extends AppCompatActivity {
                 Log.d(TAG, "isInserted : "+isInserted);
                 if (isInserted){
                     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-                    // Resetting the Value of Product_Quantity as the Product has been added to basket.
+                    /* Resetting the Value of Product_Quantity as the Product has been added to basket. */
                     p_qty = 1;
                     tv_prod_qty.setText(String.valueOf(p_qty));
                 }else{

@@ -28,162 +28,143 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/textView5"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:layout_marginStart="10dp"-->
-<!--        android:layout_marginEnd="10dp"-->
-<!--        android:gravity="center"-->
-<!--        android:text="@string/ssf_desc"-->
-<!--        android:textSize="16sp"-->
-<!--        android:textColor="#707070"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/imageView" />-->
-
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/ascf_first_point"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/slide_steps_design"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/second_slide_no_bg"
+                android:elevation="5dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:textSize="22sp"
-                android:textColor="@color/primaryDarkColor"
-                android:textStyle="bold"
-                android:text="1"/>
+                android:gravity="center"
+                android:text="1"
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/slide_steps_design"
+                android:layout_marginStart="10dp"
                 android:ems="16"
                 android:padding="14dp"
                 android:text="@string/ssf_step1"
                 android:textColor="#FFF"
                 android:textSize="12sp" />
 
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_qr_code1" />
+
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="10dp"
-            android:src="@drawable/ic_qr_code1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/ascf_second_point"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/slide_steps_design"
-            android:orientation="horizontal">
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/second_slide_no_bg"
+                android:elevation="5dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:textSize="22sp"
-                android:textColor="@color/primaryDarkColor"
-                android:textStyle="bold"
-                android:text="2"/>
+                android:gravity="center"
+                android:text="2"
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/slide_steps_design"
                 android:ems="16"
                 android:padding="15dp"
                 android:text="@string/ssf_step2"
                 android:textColor="#FFF"
                 android:textSize="12sp" />
 
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/icon_slide_takeaway" />
+
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="10dp"
-            android:src="@drawable/icon_slide_takeaway" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/ascf_third_point"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/slide_steps_design"
-            android:orientation="horizontal">
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/second_slide_no_bg"
+                android:elevation="5dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:textSize="22sp"
-                android:textColor="@color/primaryDarkColor"
-                android:textStyle="bold"
-                android:text="3"/>
+                android:gravity="center"
+                android:text="3"
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/slide_steps_design"
                 android:ems="16"
                 android:padding="15dp"
                 android:text="@string/ssf_step3"
                 android:textColor="#FFF"
                 android:textSize="12sp" />
 
-        </LinearLayout>
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_exit1" />
 
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="10dp"
-            android:src="@drawable/ic_exit1" />
+        </LinearLayout>
 
     </LinearLayout>
 

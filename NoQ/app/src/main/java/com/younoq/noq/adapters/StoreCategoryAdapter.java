@@ -15,10 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.younoq.noq.R;
-import com.younoq.noq.classes.Category;
-import com.younoq.noq.classes.City;
 import com.younoq.noq.classes.StoreCategory;
 import com.younoq.noq.models.SaveInfoLocally;
+import com.younoq.noq.networkhandler.NetworkApi;
 import com.younoq.noq.views.StoresNoq;
 
 import java.util.List;
@@ -54,7 +53,7 @@ public class StoreCategoryAdapter extends RecyclerView.Adapter<StoreCategoryAdap
         final String img_name = storeCategory.getImage_name();
         Log.d(TAG, category_name + " - img_name -> "+img_name);
 
-        final String url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/images/store_category_images/"+img_name;
+        final String url = NetworkApi.API_URL + "/DB/images/store_category_images/" + img_name;
 
         Picasso.get()
                 .load(url)
@@ -100,7 +99,7 @@ public class StoreCategoryAdapter extends RecyclerView.Adapter<StoreCategoryAdap
                         final boolean available = storeCategory.isAvailable();
                         if(available){
 
-                            // Saving the CategoryStores in SharedPreferences
+                            /* Saving the CategoryStores in SharedPreferences */
                             saveInfoLocally = new SaveInfoLocally(v.getContext());
                             saveInfoLocally.setCategoryStores(storeCategory.getStoreList().toString());
 

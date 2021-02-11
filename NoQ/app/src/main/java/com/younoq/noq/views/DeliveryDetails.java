@@ -341,6 +341,8 @@ public class DeliveryDetails extends AppCompatActivity {
             Log.d(TAG, "Sending the User to PaymentSuccess Activity");
             Intent in = new Intent(this, PaymentSuccess.class);
             in.putExtra("referral_balance_used", String.valueOf(ref_bal_used));
+            /* As the Order_Type could be In_Store or Takeaway. */
+            in.putExtra("delivery_charge", String.valueOf(delivery_charge));
             in.putExtras(txnReceipt);
             in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             /* Make the Progressbar Invisible */

@@ -33,8 +33,10 @@ import java.util.UUID;
 public class PaymentSuccess extends AppCompatActivity {
 
     private SaveInfoLocally saveInfoLocally;
-    private TextView tv1, tv_receipt_no, tv_order_type, tv_final_amt, tv_you_saved, tv_shop_details, tv_timestamp, tv_total_items, tv_pay_method, tv_thanks;
-    private String ref_bal_used, delivery_dur, calc_referral_bal;
+    private TextView tv1, tv_receipt_no, tv_order_type, tv_amt_paid, tv_you_saved, tv_shop_details,
+            tv_timestamp, tv_total_items, tv_pay_method, tv_thanks, tv_subtotal, tv_delivery_charge,
+            tv_total_amt;
+    private String ref_bal_used, delivery_dur, calc_referral_bal, delivery_charge;
     private int delivery_duration;
     private DBHelper db;
     private Bundle txnReceipt;
@@ -58,8 +60,11 @@ public class PaymentSuccess extends AppCompatActivity {
         tv_receipt_no = findViewById(R.id.ps_receipt_no);
         /* tv_ref_amt = findViewById(R.id.ps_referral_amt);
         tv_retailers_price = findViewById(R.id.ps_retailer_price); */
+        tv_delivery_charge = findViewById(R.id.ps_delivery_charge);
+        tv_total_amt = findViewById(R.id.ps_total_amt);
         tv_you_saved = findViewById(R.id.ps_you_saved);
-        tv_final_amt = findViewById(R.id.ps_final_amt);
+        tv_amt_paid = findViewById(R.id.ps_amt_paid);
+        tv_subtotal = findViewById(R.id.ps_subtotal);
         tv_shop_details = findViewById(R.id.ps_shop_name);
         tv_timestamp = findViewById(R.id.ps_timestamp);
         tv_total_items = findViewById(R.id.ps_total_items);
@@ -77,6 +82,7 @@ public class PaymentSuccess extends AppCompatActivity {
         Intent in = getIntent();
         calc_referral_bal = in.getStringExtra("calc_referral_balance");
         ref_bal_used = in.getStringExtra("referral_balance_used");
+        delivery_charge = in.getStringExtra("delivery_charge");
         txnReceipt = in.getExtras();
         txnData = txnReceipt.getStringArrayList("txnReceipt");
         /* Pushing Updates to DB */
@@ -193,12 +199,23 @@ public class PaymentSuccess extends AppCompatActivity {
 
         tv_receipt_no.setText(txnData.get(0));
 
-        /* Total Savings = Total_Discount + Referral_Balance_Used. */
-        String savings_by_us = "₹ " + (Double.parseDouble(txnData.get(1)) + Double.parseDouble(txnData.get(3)));
-        tv_you_saved.setText(savings_by_us);
+        String subtotal_amt = "₹" + txnData.get(2);
+        tv_subtotal.setText(subtotal_amt);
 
-        final String final_amt = "₹" + txnData.get(5);
-        tv_final_amt.setText(final_amt);
+        String delivery_c = "+ ₹" + delivery_charge;
+        tv_delivery_charge.setText(delivery_c);
+
+        /* Total Amount = Retailer_Price + Delivery_Charge */
+        String total_amt = "₹" + (Double.parseDouble(txnData.get(2)) + Double.parseDouble(delivery_charge));
+        tv_total_amt.setText(total_amt);
+
+        /* Total Amount Paid = Retailer_Price - Our_Price + Referral_Used */
+        String amt_paid = "₹" + (Double.parseDouble(txnData.get(2)) - Double.parseDouble(txnData.get(4)) + Double.parseDouble(txnData.get(3)));
+        tv_amt_paid.setText(amt_paid);
+
+        /* Total Savings = Total_Discount + Referral_Balance_Used. */
+        String savings_by_us = "₹" + (Double.parseDouble(txnData.get(1)) + Double.parseDouble(txnData.get(3)));
+        tv_you_saved.setText(savings_by_us);
 
         String pay_method = txnData.get(7);
         if(pay_method.equals("[Referral_Used]"))

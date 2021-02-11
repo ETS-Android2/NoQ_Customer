@@ -76,6 +76,9 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         Sprite wanderingCubes = new WanderingCubes();
         progressBar.setIndeterminateDrawable(wanderingCubes);
 
+        /* Setting the Pay_ButtonFirstTime to true. */
+        saveInfoLocally.setBoolean("PM_PayBtnFirstTime", true);
+
         txnReceipt = new Bundle();
         txnData = new ArrayList<>();
 
@@ -144,22 +147,30 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
         } else if (rb_cash.isChecked()) {
 
             /* else go to Payment_Successful Page. */
+            final boolean isFirstTime = saveInfoLocally.getBoolean("PM_PayBtnFirstTime");
 
-            /* Setting the Updated Referral_Balance to SharedPreferences. */
-            saveInfoLocally.setReferralBalance(referral_bal);
-            /* Setting txnAmount's value to final_amt. */
-            txnAmount = String.valueOf(final_amt);
-            /* Doing all the things to be done after Successful Payment(which is already done here :-)..) */
-            afterPaymentConfirm(ref_bal_used, generateTxn_Order(), generateTxn_Order(), "[Payment By Cash]");
-            /* Redirect to Payment Successful Page. */
-            Log.d(TAG, "Sending the User to PaymentSuccess Activity");
-            Intent in = new Intent(this, PaymentSuccess.class);
-            in.putExtra("referral_balance_used", ref_bal_used);
-            in.putExtras(txnReceipt);
-            in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            /* Make the Progressbar Invisible */
-            progressBar.setVisibility(View.GONE);
-            startActivity(in);
+            if (isFirstTime) {
+
+                /* Setting the Updated Referral_Balance to SharedPreferences. */
+                saveInfoLocally.setReferralBalance(referral_bal);
+                /* Setting txnAmount's value to final_amt. */
+                txnAmount = String.valueOf(final_amt);
+                /* Doing all the things to be done after Successful Payment(which is already done here :-)..) */
+                afterPaymentConfirm(ref_bal_used, generateTxn_Order(), generateTxn_Order(), "[Payment By Cash]");
+
+                saveInfoLocally.setBoolean("PM_PayBtnFirstTime", false);
+                /* Redirect to Payment Successful Page. */
+                Log.d(TAG, "Sending the User to PaymentSuccess Activity");
+                Intent in = new Intent(this, PaymentSuccess.class);
+                in.putExtra("referral_balance_used", ref_bal_used);
+                in.putExtra("delivery_charge", delivery_charge);
+                in.putExtras(txnReceipt);
+                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                /* Make the Progressbar Invisible */
+                progressBar.setVisibility(View.GONE);
+                startActivity(in);
+
+            }
 
         }
 
@@ -244,6 +255,8 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
 
             }
         } catch (NullPointerException | ExecutionException | InterruptedException e) {
+            /* Enabling the PayButton */
+            saveInfoLocally.setBoolean("PM_PayBtnFirstTime", true);
             e.printStackTrace();
         }
 
@@ -375,6 +388,7 @@ public class PaymentMethod extends AppCompatActivity implements PaytmPaymentTran
                     /* Intent to PaymentSuccess Activity. */
                     Intent in = new Intent(this, PaymentSuccess.class);
                     in.putExtra("referral_balance_used", ref_bal_used);
+                    in.putExtra("delivery_charge", delivery_charge);
                     in.putExtras(txnReceipt);
                     in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(in);

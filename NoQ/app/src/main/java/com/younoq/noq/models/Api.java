@@ -11,7 +11,7 @@ import retrofit2.http.POST;
 
 public interface Api {
 
-    String BASE_URL = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/Paytm/";
+    String BASE_URL = "http://ec2-13-126-46-177.ap-south-1.compute.amazonaws.com/DB/Paytm/";
 
     @FormUrlEncoded
     @POST("generateChecksum.php")

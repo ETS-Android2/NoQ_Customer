@@ -176,6 +176,9 @@
     <string name="pf_retry">Retry</string>
     <string name="ps_total_amt">Amount Paid</string>
     <string name="ps_savings_by_us">You Saved</string>
+    <string name="ps_subtotal">Subtotal</string>
+    <string name="ps_delivery">Delivery Charge</string>
+    <string name="ps_total">Total</string>
     <string name="ps_receipt">Receipt No.</string>
     <string name="ps_tot_price">Total Our Price : </string>
     <string name="ps_tot_retail_price">Total Retail Price</string>
@@ -314,7 +317,7 @@
     <string name="cpd_header">Choose delivery partner</string>
 
     <!-- BonusAmtDialog -->
-    <string name="bonus_amt">₹100</string>
+    <string name="bonus_amt">₹20</string>
     <string name="bad_desc">Bonus have been credited to your account!</string>
     <string name="bad_congrats">Congratulations !</string>
 

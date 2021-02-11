@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
+import com.younoq.noq.networkhandler.NetworkApi;
 import com.younoq.noq.views.ChooseShopType;
 import com.younoq.noq.classes.Store;
 import com.younoq.noq.models.SaveInfoLocally;
@@ -49,7 +50,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
 
         final String img_name = store.getImg_name();
 
-        final String url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/images/store_images/"+img_name;
+        final String url = NetworkApi.API_URL +  "/DB/images/store_images/" + img_name;
 
         Picasso.get()
                 .load(url)
@@ -61,10 +62,10 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
         holder.tv_store_name.setText(s_name);
         final String s_addr = store.getStore_address() + ", " + store.getStore_city();
         holder.tv_store_addr.setText(s_addr);
-//        final String s_loc = store.getStore_state() + ", " + store.getStore_country();
-//        holder.tv_store_loc.setText(s_loc);
-//        final String pin = store.getPincode();
-//        holder.tv_pin.setText(pin);
+        /* final String s_loc = store.getStore_state() + ", " + store.getStore_country();
+        holder.tv_store_loc.setText(s_loc);
+        final String pin = store.getPincode();
+        holder.tv_pin.setText(pin); */
 
 
     }
@@ -89,23 +90,23 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
                     int position = getAdapterPosition();
                     Store store = StoreList.get(position);
 
-//                    final String s_id = store.getStore_id();
-//                    if (s_id.equals("1")) {
+                    /* final String s_id = store.getStore_id();
+                    if (s_id.equals("1")) {
 
-//                        Bundle txnData = new Bundle();
-//                        ArrayList<String> TxnDetailList = new ArrayList<>();
-//
-//                        TxnDetailList.add(store.getStore_name());
-//                        TxnDetailList.add(store.getStore_address());
-//                        TxnDetailList.add(store.getStore_city());
-//                        TxnDetailList.add(store.getStore_state());
-//                        TxnDetailList.add(store.getStore_country());
-//
-//                        txnData.putStringArrayList("storeData", TxnDetailList);
+                        Bundle txnData = new Bundle();
+                        ArrayList<String> TxnDetailList = new ArrayList<>();
 
-//                        Intent in = new Intent(v.getContext(), ShopDetails.class);
+                        TxnDetailList.add(store.getStore_name());
+                        TxnDetailList.add(store.getStore_address());
+                        TxnDetailList.add(store.getStore_city());
+                        TxnDetailList.add(store.getStore_state());
+                        TxnDetailList.add(store.getStore_country());
+
+                        txnData.putStringArrayList("storeData", TxnDetailList);
+
+                        Intent in = new Intent(v.getContext(), ShopDetails.class); */
                         SaveInfoLocally saveInfoLocally = new SaveInfoLocally(v.getContext());
-                        // Storing the required Info in SharedPreferences.
+                        /* Storing the required Info in SharedPreferences. */
                         saveInfoLocally.set_store_id(store.getStore_id());
                         saveInfoLocally.setStoreName(store.getStore_name());
                         saveInfoLocally.setStoreAddress(store.getStore_address());
@@ -119,7 +120,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
                         final boolean in_store = store.isIn_store();
                         final boolean takeaway = store.isTakeaway();
                         final boolean home_delivery = store.isHome_delivery();
-                        // Storing ShoppingType related Info, in SharedPreferences.
+                        /* Storing ShoppingType related Info, in SharedPreferences. */
                         saveInfoLocally.setIs_InStore(in_store);
                         saveInfoLocally.setIs_Takeaway(takeaway);
                         saveInfoLocally.setIs_Home_Delivery(home_delivery);
@@ -129,17 +130,17 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
                         in.putExtra("takeaway", takeaway);
                         in.putExtra("home_delivery", home_delivery);
                         v.getContext().startActivity(in);
-//                    } else {
-//                        Toast.makeText(v.getContext(), "Service is Temporarily Unavailable in this Store", Toast.LENGTH_SHORT).show();
-//                    }
+                    /* } else {
+                        Toast.makeText(v.getContext(), "Service is Temporarily Unavailable in this Store", Toast.LENGTH_SHORT).show();
+                    } */
 
                 }
             });
 
             tv_store_name = itemView.findViewById(R.id.ns_store_name);
             tv_store_addr = itemView.findViewById(R.id.ns_store_addr);
-//            tv_store_loc = itemView.findViewById(R.id.ns_store_loc);
-//            tv_pin = itemView.findViewById(R.id.ns_store_pin);
+            /* tv_store_loc = itemView.findViewById(R.id.ns_store_loc);
+            tv_pin = itemView.findViewById(R.id.ns_store_pin); */
             im_store_image = itemView.findViewById(R.id.ns_store_img);
 
         }

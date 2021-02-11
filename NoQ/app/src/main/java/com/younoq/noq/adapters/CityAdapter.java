@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.younoq.noq.classes.City;
+import com.younoq.noq.networkhandler.NetworkApi;
 import com.younoq.noq.views.MyProfile;
 import com.younoq.noq.R;
 import com.younoq.noq.models.SaveInfoLocally;
@@ -62,7 +63,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityAdapterVie
         holder.tv_city_name.setText(city_name);
 
         final String cityname = city_name.toLowerCase() + ".png";
-        final String url = "http://ec2-13-234-120-100.ap-south-1.compute.amazonaws.com/DB/images/store_city_images/"+cityname;
+        final String url = NetworkApi.API_URL +  "/DB/images/store_city_images/" + cityname;
 
         Picasso.get()
                 .load(url)
@@ -102,7 +103,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityAdapterVie
 
                     City city = citiesList.get(getAdapterPosition());
 
-                    // If city Exists then only Route to MyProfile.
+                    /* If city Exists then only Route to MyProfile. */
                     if(city.getExists().toLowerCase().equals("true")){
 
                         if (mListener != null)

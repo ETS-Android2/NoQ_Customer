@@ -747,6 +747,8 @@ public class CartActivity extends AppCompatActivity {
             Intent in = new Intent(this, PaymentSuccess.class);
             in.putExtra("calc_referral_balance", String.valueOf(cal_ref_bal));
             in.putExtra("referral_balance_used", String.valueOf(ref_bal_used));
+            /* As the Order_Type could be In_Store or Takeaway. */
+            in.putExtra("delivery_charge", "0");
             in.putExtras(txnReceipt);
             in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(in);

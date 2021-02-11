@@ -14,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.google.android.material.tabs.TabLayout;
 import com.younoq.noq.R;
@@ -38,7 +39,7 @@ public class IntroActivity extends FragmentActivity {
     TabLayout tabIndicator;
     ImageView next_btn;
     Button getStarted;
-    Animation btnAnim;
+    Animation btnAnim, first_slide_pt, second_slide_pt, third_slide_pt;
     SaveInfoLocally saveInfoLocally;
     int pos = 0;
 
@@ -111,6 +112,12 @@ public class IntroActivity extends FragmentActivity {
         getStarted = findViewById(R.id.ia_btn_get_started);
         btnAnim = AnimationUtils.loadAnimation(this, R.anim.btn_animation);
 
+        first_slide_pt = AnimationUtils.loadAnimation(this, R.anim.second_slide_first_pt);
+        second_slide_pt = AnimationUtils.loadAnimation(this, R.anim.second_slide_first_pt);
+        second_slide_pt.setStartOffset(500);
+        third_slide_pt = AnimationUtils.loadAnimation(this, R.anim.second_slide_first_pt);
+        third_slide_pt.setStartOffset(1000);
+
         viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new MyPageFragmentAdapter(this));
         tabIndicator.setupWithViewPager(viewPager);
@@ -120,6 +127,10 @@ public class IntroActivity extends FragmentActivity {
             public void onClick(View v) {
 
                 pos = viewPager.getCurrentItem();
+
+                LinearLayout first_ll = viewPager.findViewById(R.id.ascf_first_point);
+                first_ll.setAnimation(first_slide_pt);
+
                 if (pos < 2){
                     pos++;
                     viewPager.setCurrentItem(pos);
@@ -136,6 +147,13 @@ public class IntroActivity extends FragmentActivity {
         tabIndicator.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+
+                LinearLayout first_ll = viewPager.findViewById(R.id.ascf_first_point);
+                first_ll.startAnimation(first_slide_pt);
+                LinearLayout second_ll = viewPager.findViewById(R.id.ascf_second_point);
+                second_ll.startAnimation(second_slide_pt);
+                LinearLayout third_ll = viewPager.findViewById(R.id.ascf_third_point);
+                third_ll.startAnimation(third_slide_pt);
 
                 if (tab.getPosition() == 2) {
                     prepareLastScreen();
@@ -187,7 +205,7 @@ public class IntroActivity extends FragmentActivity {
         getStarted.setVisibility(View.VISIBLE);
         tabIndicator.setVisibility(View.INVISIBLE);
 
-        getStarted.setAnimation(btnAnim);
+        getStarted.startAnimation(btnAnim);
 
     }
 
