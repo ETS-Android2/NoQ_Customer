@@ -256,25 +256,25 @@ public class OTPConfirmActivity extends AppCompatActivity {
         // Storing the Logs in the Logger.
         logger.writeLog(TAG, "OnResend()","OnResend() Func. called\n");
 
-        otp_pin = generatePIN();
-//        otp_pin = "0070";
+//        otp_pin = generatePIN();
+        otp_pin = "0070";
         otp.setText("");
         otp.setError(null);
 
         Log.d(TAG, "Phone No. in OnResend : "+phone);
 
         progressBar.setVisibility(View.VISIBLE);
-        final String type = "send_msg";
-        final String msg = otp_pin + " is your NoQ Verification Code.Don't Share it with other people.The code is valid for only 5 minutes.";
-        try {
-            String result = new BackgroundWorker(this).execute(type, msg, phone).get();
-            // Storing the Logs in the Logger.
-            logger.writeLog(TAG, "OnResend()","BackgroundWorker 'send_msg' Called, OTP Resent Successfully\n");
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Storing the Logs in the Logger.
-            logger.writeLog(TAG,"OnResend()", e.getMessage());
-        }
+//        final String type = "send_msg";
+//        final String msg = otp_pin + " is your NoQ Verification Code.Don't Share it with other people.The code is valid for only 5 minutes.";
+//        try {
+//            String result = new BackgroundWorker(this).execute(type, msg, phone).get();
+//            // Storing the Logs in the Logger.
+//            logger.writeLog(TAG, "OnResend()","BackgroundWorker 'send_msg' Called, OTP Resent Successfully\n");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            // Storing the Logs in the Logger.
+//            logger.writeLog(TAG,"OnResend()", e.getMessage());
+//        }
 
         // Setting the OTPConfirmFirstTime to false.
         save_data.setBoolean("OTPConfirmFirstTime", true);

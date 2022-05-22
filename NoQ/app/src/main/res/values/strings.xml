@@ -317,7 +317,7 @@
     <string name="cpd_header">Choose delivery partner</string>
 
     <!-- BonusAmtDialog -->
-    <string name="bonus_amt">₹20</string>
+    <string name="bonus_amt">₹10</string>
     <string name="bad_desc">Bonus have been credited to your account!</string>
     <string name="bad_congrats">Congratulations !</string>
 

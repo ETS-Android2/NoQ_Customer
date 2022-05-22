@@ -53,7 +53,7 @@ public class StoreCategoryAdapter extends RecyclerView.Adapter<StoreCategoryAdap
         final String img_name = storeCategory.getImage_name();
         Log.d(TAG, category_name + " - img_name -> "+img_name);
 
-        final String url = NetworkApi.API_URL + "/DB/images/store_category_images/" + img_name;
+        final String url = NetworkApi.API_URL + "/images/store_category_images/" + img_name;
 
         Picasso.get()
                 .load(url)

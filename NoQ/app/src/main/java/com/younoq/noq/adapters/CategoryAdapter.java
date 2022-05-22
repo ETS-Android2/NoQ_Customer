@@ -56,7 +56,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         final String img_name = category.getImg_name();
 
-        final String url = NetworkApi.API_URL +  "/DB/images/product_category_images/"+img_name;
+        final String url = NetworkApi.API_URL +  "/images/product_category_images/"+img_name;
 
         Picasso.get()
                 .load(url)

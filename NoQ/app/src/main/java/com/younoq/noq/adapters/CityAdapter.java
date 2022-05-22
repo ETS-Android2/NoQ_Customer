@@ -63,7 +63,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityAdapterVie
         holder.tv_city_name.setText(city_name);
 
         final String cityname = city_name.toLowerCase() + ".png";
-        final String url = NetworkApi.API_URL +  "/DB/images/store_city_images/" + cityname;
+        final String url = NetworkApi.API_URL +  "/images/store_city_images/" + cityname;
 
         Picasso.get()
                 .load(url)

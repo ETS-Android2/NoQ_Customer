@@ -50,7 +50,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresAdapter.StoresView
 
         final String img_name = store.getImg_name();
 
-        final String url = NetworkApi.API_URL +  "/DB/images/store_images/" + img_name;
+        final String url = NetworkApi.API_URL +  "/images/store_images/" + img_name;
 
         Picasso.get()
                 .load(url)

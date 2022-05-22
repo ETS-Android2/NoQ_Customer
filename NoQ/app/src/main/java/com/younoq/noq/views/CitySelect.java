@@ -115,7 +115,7 @@ public class CitySelect extends AppCompatActivity {
         // If the app is opened for the First Time, and there is No DirectLogin to the App.
         if (saveInfoLocally.isFirstLogin() && !isDirectLogin){
 
-            showBonusDialog();
+//            showBonusDialog();
 
         }
 

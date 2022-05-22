@@ -113,14 +113,14 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             img_name += ".png";
 
             if(sid.equals("3")){
-                url = NetworkApi.API_URL +  "/DB/school_images/" + img_name;
+                url = NetworkApi.API_URL +  "/school_images/" + img_name;
                 Picasso.get()
                         .load(url)
                         .fit()
                         .placeholder(R.drawable.ic_launcher_foreground)
                         .into(holder.iv_prod_img);
             } else {
-                url = NetworkApi.API_URL + "/DB/images/" + img_name;
+                url = NetworkApi.API_URL + "/images/product_images/" + img_name;
                 Log.d(TAG, url);
                 /* Picasso.get()
                         .load(url)

@@ -277,13 +277,13 @@ public class ProductDetails extends AppCompatActivity {
 
             String url;
             if(sid.equals("3")){
-                url = NetworkApi.API_URL +  "/DB/school_images/" + img_name;
+                url = NetworkApi.API_URL +  "/school_images/" + img_name;
                 Glide.with(this)
                         .load(url)
                         .placeholder(R.drawable.ic_launcher_foreground)
                         .into(im);
             } else {
-                url =  NetworkApi.API_URL +  "/DB/images/" + img_name;
+                url =  NetworkApi.API_URL +  "/images/product_images/" + img_name;
                 Glide.with(this)
                         .load(url)
                         .centerCrop()

@@ -13,7 +13,7 @@ import retrofit2.http.Part;
 
 public interface NetworkApi {
 
-    String API_URL = "http://ec2-13-126-46-177.ap-south-1.compute.amazonaws.com";
+    String API_URL = "https://www.freemindtechnologies.com/NoQ";
 
 
     @Multipart
@@ -30,12 +30,12 @@ public interface NetworkApi {
                                                          @Part("category_name") RequestBody category);
 
     @Multipart
-    @POST("DB/retrieve_categories_new.php")
+    @POST("/DB/retrieve_categories_new.php")
     Call<JSONArray> getCategoriesFromStore(@Part("store_id") RequestBody searchableItem);
 
 
     @Multipart
-    @POST("DB/retrieve_products_list.php")
+    @POST("/DB/retrieve_products_list.php")
     Call<JSONArray> getProductsList(@Part("store_id") String storeId,@Part("category_name") RequestBody searchableItem);
 
 }
